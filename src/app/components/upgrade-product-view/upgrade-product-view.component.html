@@ -1,0 +1,17 @@
+<div class="row">
+    <label class="label-form">
+        Upgrade Type: {{ upgrade.upgradeType ? upgrade.upgradeType : "Not assigned" }}
+    </label>
+</div>
+
+<div class="row">
+    <label class="label-form">
+        Release Date: {{ upgrade.releaseDate ? (upgrade.releaseDate | date:'dd/MM/yyyy') : "Not assigned" }}
+    </label>
+</div>
+
+<div class="row">
+    <label class="label-form">
+        Change Log: {{ upgrade.changeLog ? upgrade.changeLog : "Not Assigned"}}
+    </label>
+</div>

@@ -1,0 +1,20 @@
+<form (ngSubmit)="submit(form)" #form="ngForm" class="entity-form" id="product-family-form">
+    <h1 class="form-title">New Phone Family</h1>
+    <div class="line-title"></div>
+
+    <div id="form-content">
+        <div class="row">
+            <div class="col m9 s12">
+                <label for="familyName" class="label-form required" id="family-name">Family Name: </label>
+                <input type="text" class="input-form" [(ngModel)]="product.nameFamily" name="familyName" required>
+            </div>
+        </div>
+
+        <!-- Buttons for users that can add and edit Phone Family -->
+        <div class="form-buttons">
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean" *ngIf="this.user.userRole != 'USER'">Clean</button>
+            <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save" *ngIf="this.user.userRole != 'USER'" value="Save" [disabled]="form.invalid">Save</button>
+        </div>
+    </div>
+
+</form>

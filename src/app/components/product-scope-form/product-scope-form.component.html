@@ -1,0 +1,50 @@
+<form (ngSubmit)="submit(form)" #form="ngForm"  id="product-scope-form">
+    <!--class="entity-form" 
+        <h1 class="form-title">Detailed Scope</h1>
+    <div class="line-title"></div> -->
+
+    <div id="form-content">
+
+        <div class="row">
+            <label class="label-form">
+                Product: {{product.name}}
+            </label>
+            <input type="text" [value]="product" [(ngModel)]="productScope.product" [ngModelOptions]="{standalone: true}" hidden>
+        </div>
+
+        <div class="row select-div">
+            <div class="col m10 s12">
+                <label class="label-form required">SO: </label>
+                <select class="browser-default" id="so-select" name="so" [(ngModel)]="productScope.so" [compareWith]="compareByName">
+                    <option [value]="null" selected disabled>Select the option</option>
+                    <option *ngFor="let s of so" [ngValue]="s">{{s}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row select-div">
+            <div class="col m10 s12">
+                <label class="label-form required">Model: </label>
+                <select class="browser-default" id="model-select" name="model" [(ngModel)]="productScope.distModel" [compareWith]="compareById">
+                    <option [value]="null" selected disabled>Select the option</option>
+                    <option *ngFor="let m of models" [ngValue]="m">{{m.modelName}} - Region: {{m.region.regionName}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s10">
+                <label for="commentary" class="label-form">Commentary: </label>
+                <textarea id="commentary" class="materialize-textarea" [(ngModel)]="productScope.comment" name="commentary" data-length="255"></textarea>
+            </div>
+        </div>
+
+        <!-- Buttons for users that can add and edit Product Scope -->
+        <div class="row form-buttons">
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean">Clean</button>
+            <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save" value="Save" [disabled]="form.invalid">Save</button>
+        </div>
+
+    </div>
+
+</form>

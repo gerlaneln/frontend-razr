@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;500&display=swap');
+
+/* adicionar animações */
+
+nav.nav{
+  background-color: #260033;
+  transition: all 150ms ease;
+  position: fixed;
+  z-index: 1;
+  width: 317px;
+  /* width: 50px; */
+  height: 100vh;
+  box-shadow: 0.063rem 0 3px 0 #260033ac;
+  color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+nav.sidenav-collapsed  {
+  background-color: #260033;
+  transition: all 150ms ease;
+  position: fixed;
+  z-index: 1;
+  /* width: 317px; */
+  width: 85px;
+  height: 100vh;
+  box-shadow: 0.063rem 0 3px 0 #260033ac;
+  color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+nav.nav>.nav-head {
+  display: flex;
+  margin: 0 0 70px 0;
+  width: 100%;
+}
+
+nav.sidenav-collapsed > .nav-head {
+  display: flex;
+  margin: 0 0 70px 0;
+  width: 100%;
+  background: #260033;
+}
+
+
+.logo-link:hover{
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+  color: #f2f2f2;
+}
+
+ul.nav-list {
+  display: flex;
+  flex-direction: column;
+}
+
+nav.sidenav-collapsed > .nav-head > .logo-link > img.logo-img {
+  height: 60px;
+  width: 60px;
+  margin-left: 12.5px;
+}
+
+nav.nav > .nav-head > .logo-link > img.logo-img {
+  height: 60px;
+  width: 60px;
+  margin-left: 112px;
+}
+
+div.nav-content {
+  width: 100%;
+}
+
+li.nav-options,
+a.nav-option-link {
+  font-family: 'Montserrat', sans-serif;
+
+  width: 100%;
+  height: 64.76px;
+
+  display: flex;
+  align-items: center;
+}
+
+
+nav.nav > div.nav-content > ul.nav-list > li.nav-options {
+  margin-bottom: 13px;
+/* 
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #FFFFFF; */
+}
+
+nav.sidenav-collapsed > div.nav-content > ul.nav-list > li.nav-options {
+  margin-bottom: 13px;
+/* 
+  border-left: 2px solid #FFFFFF;
+  border-right: 0px solid #FFFFFF; */
+
+}
+
+nav.nav > div.nav-content > ul.nav-list > li.nav-options:hover {
+  margin-bottom: 13px;
+/* 
+  border-left: 2px solid #9f9f9f;
+  border-right: 2px solid #9f9f9f; */
+}
+
+nav.sidenav-collapsed > div.nav-content > ul.nav-list > li.nav-options:hover {
+  margin-bottom: 13px;
+/* 
+  border-left: 2px solid #d07cec;
+  border-right: 0px solid #9f9f9f; */
+
+}
+
+li.nav-options:hover {
+  background: #39004d;
+  text-indent: 0.2em;
+}
+
+i.nav-option-icon {
+  margin-right: 15px;
+}
+
+/* #btn-close{
+
+} */
+
+a.close-btn{
+  margin-top: 10px;
+margin-left: 240px;
+position: fixed;
+}
+
+a>i.close-btn {
+  color: black;
+}

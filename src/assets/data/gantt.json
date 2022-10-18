@@ -1,0 +1,59 @@
+[
+  {
+    "category": "leticia",
+    "fromDate": "2022-08-02 00:00",
+    "toDate": "2022-08-08 23:59",
+    "columnSettings": {
+      "fill": "#57315b"
+    },
+    "task": "Sprint #1 ",
+    "personnel": 13
+  },
+  {
+    "category": "leticia",
+    "fromDate": "2022-08-08 00:00",
+    "toDate": "2022-08-09 23:59",
+    "columnSettings": {
+      "fill": "#E6E6FA"
+    },
+    "task": "Apresentação da sprint #1",
+    "personnel": 13
+  },
+  {
+    "category": "leticia",
+    "fromDate": "2022-08-09 00:00",
+    "toDate": "2022-08-19 23:59",
+    "columnSettings": {
+      "fill": "#57315b"
+    },
+    "task": "Sprint #1",
+    "personnel": 24
+  },
+  {
+    "category": "rogerio",
+    "fromDate": "2022-08-22 14:30",
+    "toDate": "2022-09-11 23:59",
+    "columnSettings": {
+      "fill": "#9d917c"
+    },
+    "task": "Sprint #2"
+  },
+  {
+    "category": "rogerio",
+    "fromDate": "2022-09-12 00:00",
+    "toDate": "2022-09-12 23:59",
+    "columnSettings": {
+      "fill": "#212F3D"
+    },
+    "task": "Apresentação da sprint #2"
+  },
+  {
+    "category": "sergio",
+    "fromDate": "2022-09-13 14:30",
+    "toDate": "2022-09-27 14:00",
+    "columnSettings": {
+      "fill": "#3b405b"
+    },
+    "task": "Sprint #3"
+  }
+]

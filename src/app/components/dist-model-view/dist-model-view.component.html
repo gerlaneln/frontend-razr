@@ -1,0 +1,79 @@
+<app-navigation></app-navigation>
+<div class="view-content">
+    <div class="row view-header">
+        <div class="title-div col m8 s12">
+            <h1 class="form-title">Model View</h1>
+            <div class="line-title"></div>
+        </div>
+        <div class="header-view-btn right">
+            <!-- Modal call to add new Dist Model -->
+            <button id="modal-view" (click)="edit(0)" data-target="modal" class="m5 s5 waves-effect waves-light btn modal-trigger indigo darken-4">
+                New Model
+            </button>
+            <!-- Update view with new Dist Models -->
+            <button (click)="get()" data-target="modal" class="s2 m2 waves-effect waves-light btn deep-purple darken-4">
+                <i class="material-icons">autorenew</i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Dist Model Form modal -->
+    <div id="modal" class="modal">
+        <app-dist-model-form [id]="this.id"></app-dist-model-form>
+    </div>
+
+    <!-- List of Dist Models -->
+    <ul class="view-list" id="model-view">
+        <li *ngFor="let model of models" id="li-model">
+            {{ model.modelName }}
+            <!-- Buttons for user that can edit Dist Model -->
+            <div class="view-buttons" id="model-buttons" *ngIf="this.user.userRole != 'USER'">
+                <a (click)="edit(model.id)" data-target="modal" class="waves-effect waves-light modal-trigger btn btn-view-list indigo">Edit</a>
+            </div>
+            <!-- Buttons for user that can't edit Dist Model -->
+            <div class="view-buttons" id="model-buttons" *ngIf="this.user.userRole == 'USER'">
+                <a (click)="edit(model.id)" data-target="modal" class="waves-effect waves-light modal-trigger btn btn-view-list indigo">
+                    View
+                </a>
+            </div>
+            
+            <!-- Dynamic table for Dist Model month by month view -->
+            <table class="col m12 model-table responsive-table">
+                <thead>
+                    <tr>
+                        <!-- Generates table columns based on the months before taDate -->
+                        <td *ngFor="let item of createRange(model.beforeTa); index as i">
+                            -{{model.beforeTa-i}}
+                        </td>
+                        <!-- Static column for the taDate -->
+                        <th>
+                            {{model.taDate | date:'dd/MM/yyyy'}}
+                        </th>
+                        <!-- Generates table columns based on the months after taDate -->
+                        <td *ngFor="let item of createRange(model.afterTa); index as i">
+                            +{{i+1}}
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Total personnel is divided by the amont of months in this model -->
+                    <tr>
+                        <td *ngFor="let item of createRange(model.beforeTa); index as i">
+                            {{(model.personnel/(model.beforeTa+model.afterTa+1)) | number : '1.2-2'}}
+                        </td>
+                        <td>
+                            {{(model.personnel/(model.beforeTa+model.afterTa+1)) | number : '1.2-2'}}
+                        </td>
+                        <td *ngFor="let item of createRange(model.afterTa); index as i">
+                            {{(model.personnel/(model.beforeTa+model.afterTa+1)) | number : '1.2-2'}}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <td colspan="6">Total personnel: {{model.personnel}}</td>
+                </tfoot>
+            </table>
+        </li>
+    </ul>
+</div>
+

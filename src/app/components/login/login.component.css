@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;500&display=swap');
+
+/* font-family: 'Lato', sans-serif;
+font-family: 'Montserrat', sans-serif; */
+
+#login-content{
+    margin: 0;
+    width: auto;
+    height: 100vh;
+    background-color: #0F0014;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#logo{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#logo-motorola{
+    height: 100px;
+    align-self: center;
+}
+
+h1{
+    font-family: 'Montserrat', sans-serif;
+    color: #f2f2f2;
+    text-align: center;
+    font-size: 40px;
+    padding-bottom: 5px;
+}
+
+#login-form{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 40%;
+    padding: 1em;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+}
+
+.label-login{
+    font-family: 'Lato', sans-serif;
+    padding: 10px 0;
+    font-size: 18px;
+    color: #0F0014;
+}
+
+.input-login{
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #f9f8f6;
+    border: 0.5px solid #dbd8d1;
+    text-indent: 5px;
+}
+
+.input-login:hover{
+    border-bottom: 0.5px solid #260033;
+}
+
+.input-login:focus{
+  outline: none;
+  /* outline: #260033 auto; */
+}
+
+#password-link{
+    text-decoration: none;
+    padding: 5px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+}
+
+#password-link:hover{
+    font-weight: bolder;
+    text-indent: 0.2em;
+}
+
+#login-buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.button{
+    /* background-color: #260033; */
+    /* border: 1px solid #260033; */
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    padding: 5px 10px;
+    height: 40px;
+    cursor: pointer;
+    width: 180px;
+}
+
+.button:hover{
+    /* background-color: #260033; */
+    transition: background 0.5s ease;
+    /* color: #f2f2f2; */
+}
+
+#sign-up-button{
+    border: none;
+    background-color: #600080;
+    color: #f2f2f2;
+}
+
+#sign-up-button:hover{
+    background-color: #f2f2f2;
+    color: #600080;
+    border: 1px solid #600080;
+}
+
+/* #login-button{
+    width: fit-content;
+} */
+
+#login-button:disabled{
+    border: 1px solid #cdcdcd;
+}
+
+#login-button:disabled:hover{
+    background-color: #f2f2f2;
+    color: #cdcdcd;
+    cursor: not-allowed;
+}
+
+#login-button:enabled{
+    background-color: #260033;
+    color: #f2f2f2;
+    border: none;
+}
+
+#login-button:enabled:hover{
+    border: 1px solid #260033;
+    background-color: #f2f2f2;
+    color: #260033;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 666px) {
+
+    #login-form{
+        width: 70vw;
+    }
+
+    #login-buttons{
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+    }
+
+    .button{
+        width: 100%;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    #login-button{
+        width: 100%;
+    }
+}

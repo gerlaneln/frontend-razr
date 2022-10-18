@@ -1,0 +1,87 @@
+<div class="signup-content">
+  <div id="logo">
+    <a routerLink="/login">
+      <img
+        src="../assets/img/vector-white.svg"
+        id="logo-motorola"
+        alt="Motorola"
+      />
+    </a>
+  </div>
+  <div>
+    <h1 id="titulo">Sign up</h1>
+  </div>
+
+  <form (ngSubmit)="submit(form)" id="sign-up-form" #form="ngForm">
+    <div class="signup-name" id="signup-separator">
+      <label for="name" class="required">Name</label>
+      <input
+        type="text"
+        [(ngModel)]="register.name"
+        name="name"
+        id="name"
+        autocomplete="off"
+        required
+      />
+    </div>
+
+    <div class="signup-email" id="signup-separator">
+      <label for="email" class="required">E-mail</label>
+      <input
+        type="email"
+        [(ngModel)]="register.email"
+        name="email"
+        id="email"
+        autocomplete="off"
+        required
+      />
+    </div>
+
+    <div class="signup-login" id="signup-separator">
+      <label for="user" class="required">Username</label>
+      <input
+        type="text"
+        [(ngModel)]="register.username"
+        name="user"
+        id="username"
+        autocomplete="off"
+        required
+      />
+    </div>
+
+    <div class="signup-password" id="signup-separator">
+      <label for="password" class="required">Password</label>
+      <input
+        type="password"
+        [(ngModel)]="register.password"
+        name="password"
+        id="password"
+        autocomplete="off"
+        required
+      />
+    </div>
+
+    <div class="confirm-password" id="signup-separator">
+      <label for="cpassword" class="required">Confirm Password</label>
+      <input
+        type="password"
+        [(ngModel)]="this.password"
+        name="cpassword"
+        id="cpassword"
+        autocomplete="off"
+        required
+      />
+    </div>
+
+    <div id="buttons">
+      <button class="button" id="back-button" routerLink="/login">
+        Back to login
+      </button>
+      <button class="button" id="create-button" type="submit"  [disabled]="form.invalid">
+        Create access
+      </button>
+    </div>
+
+
+  </form>
+</div>

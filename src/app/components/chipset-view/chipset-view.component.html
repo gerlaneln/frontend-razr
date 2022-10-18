@@ -1,0 +1,43 @@
+<app-navigation></app-navigation>
+<div class="view-content">
+    <div class="row view-header">
+        <div class="title-div col m8 s12">
+            <h1 class="form-title">Chipset View</h1>
+            <div class="line-title"></div>
+        </div>
+        <div class="header-view-btn right">
+            <!-- Modal call to add new Chipset -->
+            <button id="modal-view" (click)="edit(0)" data-target="modal"
+                class="m5 s5 waves-effect waves-light btn modal-trigger indigo darken-4">
+                New Chipset
+            </button>
+            <!-- Update view with new Chipsets -->
+            <button (click)="get()" data-target="modal" class="s2 m2 waves-effect waves-light btn deep-purple darken-4">
+                <i class="material-icons">autorenew</i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Chipset Form modal -->
+    <div id="modal" class="modal">
+        <app-chipset-form [id]="id"></app-chipset-form>
+    </div>
+
+    <!-- List os Chipsets -->
+    <ul class="view-list">
+        <li *ngFor="let reg of chip">
+            {{ reg.chipsetName}}
+            <!-- Buttons for user that can edit chipset -->
+            <div class="view-buttons" *ngIf="this.user.userRole != 'USER'">
+                <a (click)="edit(reg.id)" data-target="modal"
+                    class="waves-effect waves-light modal-trigger btn btn-view-list indigo">Edit</a>
+            </div>
+            <!-- Buttons for user that can't edit chipset -->
+            <div class="view-buttons" *ngIf="this.user.userRole == 'USER'">
+                <a (click)="edit(reg.id)" data-target="modal" class="waves-effect waves-light modal-trigger btn btn-view-list indigo">
+                    View
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>

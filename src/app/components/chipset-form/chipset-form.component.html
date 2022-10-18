@@ -1,0 +1,21 @@
+<form (ngSubmit)="submit(form)" #form="ngForm" class="entity-form" id="chipset-form">
+
+    <div id="form-content">
+        <h1 class="form-title">New Chipset</h1>
+        <div class="line-title" id="line-form"></div>
+        <div>
+            <label for="manufacturer" class="label-form required">Manufacturer name:</label>
+            <input type="text" class="input-form" id="manufacturer-name" [(ngModel)]="chip.manufacturerName" name="manufacturer" required>
+        </div>
+
+        <label for="chipsetName" class="label-form required">Chipset name: </label>
+        <input type="text" class="input-form" id="chipset-name" [(ngModel)]="chip.chipsetName" name="chipsetName" required>
+
+        <!-- Buttons for users that can add and edit Chipsets -->
+        <div class="form-buttons">
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean" *ngIf="this.user.userRole != 'USER'">Clean</button>
+            <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save" *ngIf="this.user.userRole != 'USER'" value="Save" [disabled]="form.invalid">Save</button>
+        </div>
+    </div>
+
+</form>

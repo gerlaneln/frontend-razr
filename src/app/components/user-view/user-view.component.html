@@ -1,0 +1,61 @@
+<app-navigation></app-navigation>
+<div class="view-content" id="user-view">
+    <div class="row view-header">
+        <div class="title-div col s12 m8" id="user-title">
+            <h1 class="form-title">User View</h1>
+            <div class="line-title"></div>
+        </div>
+        <div class="header-view-btn right">
+            <!-- Modal call to add new User -->
+            <button id="modal-view" (click)="edit(0)" data-target="modal" class="m5 s5 waves-effect waves-light btn modal-trigger indigo darken-4">
+                New User
+            </button>
+            <!-- Update view with new User -->
+            <button (click)="get()" data-target="modal" class="s2 m2 waves-effect waves-light btn deep-purple darken-4">
+                <i class="material-icons">autorenew</i>
+            </button>
+        </div>
+    </div>
+
+    <!-- User Form modal -->
+    <div id="modal" class="modal">
+        <app-user-form [id]="this.id"></app-user-form>
+    </div>
+
+    <!-- List of Users -->
+    <table class="user-table col m12 s12 highlight responsive-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>E-mail</th>
+                <th>Role</th>
+                <th>Active</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of users">
+                <td>{{ item.name }}</td>
+                <td>{{ item.username }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.userRole }}</td>
+                <td>{{ item.active ? "Yes" : "No" }}</td>
+                <td>
+                    <!-- Buttons for user that can edit Users -->
+                    <div *ngIf="this.user.userRole != 'USER'">
+                        <a (click)="edit(item.id)" data-target="modal" class="waves-effect waves-light modal-trigger btn btn-view-list indigo">
+                            Edit
+                        </a>
+                    </div>
+                    <!-- Buttons for user that can't edit Users -->
+                    <div class="view-buttons" *ngIf="this.user.userRole == 'USER'">
+                        <a (click)="edit(item.id)" data-target="modal" class="waves-effect waves-light modal-trigger btn btn-view-list indigo">
+                            View
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,58 @@
+<form (ngSubmit)="submit(form)" #form="ngForm" class="entity-form" id="model-form">
+    <h1 class="form-title">New Model</h1>
+    <div class="line-title"></div>
+
+    <div id="form-content">
+        <div class="row">
+            <div class="col m9 s12">
+                <label for="modelName" class="label-form required">Model Name: </label>
+                <input type="text" [(ngModel)]="model.modelName" class="input-form" id="model-name" name="modelName" required>
+            </div>
+            <div class="col m3 s12">
+                <label for="personnel" class="label-form required">Personnel: </label>
+                <input type="number" id="personnel" [(ngModel)]="model.personnel" name="personnel" required/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col m4 s12">
+                <label for="taDate" class="label-form required">TA Date: </label>
+                <input name="taDate" id="ta-date" [(ngModel)]="model.taDate" type="date" required>
+            </div>
+            <div class="col m4 s6">
+                <label for="beforeTA" class="label-form required">Months Before TA: </label>
+                <input name="beforeTA" id="before-ta" [(ngModel)]="model.beforeTa" type="number" required>
+            </div>
+            <div class="col m4 s6">
+                <label for="afterTA" class="label-form required">Months After TA: </label>
+                <input name="afterTA" id="after-ta" [(ngModel)]="model.afterTa" type="number" required>
+            </div>
+        </div>
+
+        <div class="row select-div">
+            <div class="col m8 s12">
+                <label class="label-form required" for="region">Region: </label>
+                <select class="browser-default" id="region-select" [(ngModel)]="model.region" (ngModelChange)="getPhoneCompanies(model.region)" name="region" [compareWith]="compareById" required>
+                    <option [value]="null" selected disabled>Select the Region</option>
+                    <option *ngFor="let r of regions" [ngValue]="r">{{ r.regionName }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row select-div">
+            <div class="col m8 s12">
+                <label class="label-form" for="phoneCompany">Phone Company: </label>
+                <select class="browser-default" [(ngModel)]="model.company" name="phoneCompany" [compareWith]="compareById">
+                    <option [value]="null" selected disabled>Select the Phone Company</option>
+                    <option *ngFor="let p of phoneCompanies" [ngValue]="p">{{p.companyName}}</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Buttons for users that can add and edit Models -->
+        <div class="form-buttons">
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean" *ngIf="this.user.userRole != 'USER'">Clean</button>
+            <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save" *ngIf="this.user.userRole != 'USER'" value="Save" [disabled]="form.invalid">Save</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,52 @@
+[
+  {
+    "category": "prod 1",
+    "fromDate": "2022-01-01 00:00",
+    "toDate": "2022-02-01 23:59",
+    "columnSettings": {
+      "fill": "#57315b"
+    },
+    "task": "Sprint #1",
+    "personnel": 3
+  },
+  {
+    "category": "prod 1",
+    "fromDate": "2022-02-01 00:00",
+    "toDate": "2022-03-01 23:59",
+    "columnSettings": {
+      "fill": "#57315b"
+    },
+    "task": "Apresentação",
+    "personnel": 2
+  },
+  {
+    "category": "prod 1",
+    "fromDate": "2022-03-01 00:00",
+    "toDate": "2022-04-01 23:59",
+    "columnSettings": {
+      "fill": "#57315b"
+    },
+    "task": "Sprint #1",
+    "personnel": 1
+  },
+  {
+    "category": "prod 1",
+    "fromDate": "2022-04-01 00:00",
+    "toDate": "2022-05-01 23:59",
+    "columnSettings": {
+      "fill": "#9d917c"
+    },
+    "task": "Sprint #1",
+    "personnel": 4
+  },
+  {
+    "category": "prod 1",
+    "fromDate": "2022-05-01 00:00",
+    "toDate": "2022-06-01 00:00",
+    "columnSettings": {
+      "fill": "#57315b"
+    },
+    "task": "Sprint #1",
+    "personnel": 1
+  }
+]

@@ -1,0 +1,37 @@
+<nav [ngClass]="collapsed ? 'nav' : 'sidenav-collapsed'"   appClickOuside (clickedOutside)="toggleSideNavOff()">
+  <div class="nav-head">
+    <a class="logo-link" (click)="toggleCollapse()"
+      ><img src="../assets/img/vector-white.svg" class="logo-img" alt="Motorola"
+    /></a>
+  </div>
+
+  <!-- botão dispensavel? -->
+  <a class="close-btn btn-floating waves-effect waves-light white" id="btn-close" *ngIf="collapsed">
+    <i class="close-btn material-icons" *ngIf="collapsed"(click)="closeSidenav()">close</i>
+  </a>
+  <div class="nav-content">
+    <!-- <div class="nav-content" *ngIf="collapsed" [ngStyle]="{'background': 'red'}"> -->
+    <ul class="nav-list">
+      <li class="nav-options">
+        <a href="/home" class="nav-option-link">
+          <i class="material-icons nav-option-icon">home</i>
+          <span href="" @fadeInOut *ngIf="collapsed">Home</span>
+        </a>
+      </li>
+
+      <li class="nav-options">
+        <a href="/signup" class="nav-option-link">
+          <i class="material-icons nav-option-icon">group_add</i>
+          <span @fadeInOut *ngIf="collapsed">Registration</span>
+        </a>
+      </li>
+
+      <li class="nav-options">
+        <a href="/logout" class="nav-option-link">
+          <i class="material-icons nav-option-icon">login</i>
+          <span href="" @fadeInOut *ngIf="collapsed">Login</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

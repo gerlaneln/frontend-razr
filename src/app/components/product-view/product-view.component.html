@@ -1,0 +1,176 @@
+<app-navigation></app-navigation>
+<div class="view-content">
+    <div class="row view-header">
+        <div class="title-div col m8 s12">
+            <h1 class="form-title">Product View</h1>
+            <div class="line-title"></div>
+        </div>
+        <div class="header-view-btn right">
+            <button id="modal-view" routerLink="/product/form" [queryParams]="{ id: 0 }" 
+                    class="m5 s5 waves-effect waves-light btn indigo darken-4"
+                    *ngIf="this.user.userRole != 'USER'">
+                New Product
+            </button>
+            <button (click)="getProduct()" data-target="modal"
+                    class="s2 m2 waves-effect waves-light btn deep-purple darken-4">
+                <i class="material-icons">autorenew</i>
+            </button>
+        </div>
+    </div>
+
+    <!-- <div id="modalScope" class="modal">
+        <app-product-scope-form [product]="this.product"></app-product-scope-form>
+    </div> -->
+
+    <!-- <div id="modalUpgrade" class="modal">
+        <app-upgrade-form [product]="this.product"></app-upgrade-form>
+    </div> -->
+
+    <ul class="view-list col s12" id="product-view">
+        <li *ngFor="let product of products" id="li-product">
+
+            <!-- <div class="product-image col s6">
+                <img src="" alt="{{product.name}} Image">
+            </div> -->
+
+            <div class="row">
+                <span class="product-info" id="product-name">
+                    {{ product.name }}
+                </span>
+            </div>
+            <div class="product-info-container row">
+                <div class="col m4 s12">
+                    <span class="product-info-bold">
+                        Broadband:
+                    </span>
+                    <span class="product-info">
+                        {{ product.broadband }}
+                    </span>
+                    <span class="product-info-bold">
+                        Chipset: 
+                    </span>
+                    <span class="product-info">
+                        {{ product.chipset ? product.chipset.chipsetName : "Not assigned"}}
+                    </span>
+                </div>
+                <div class="col m3 s12">
+                    <span class="product-info-bold">
+                        First SA: 
+                    </span>
+                    <span class="product-info">
+                        {{ product.firstSA | date:'dd/MM/yyyy' }}
+                    </span>
+                    <span class="product-info-bold">
+                        First UG: 
+                    </span>
+                    <span class="product-info">
+                        {{ product.firstUG ? (product.firstUG | date:'dd/MM/yyyy') : "Not assigned"}}
+                    </span>
+                </div>
+                <div class="col m5 s12">
+                    <div class="row">
+                        <a routerLink="/product/form" [queryParams]="{ id: product.id }" 
+                            class="right waves-effect waves-light btn btn-view-list indigo"
+                            *ngIf="verifyCredentials(product.team.id) || this.user.userRole != 'USER'">
+                            Edit {{product.name}}
+                        </a>
+                        <a routerLink="/product/form" [queryParams]="{ id: product.id }" 
+                            class="right waves-effect waves-light btn btn-view-list indigo"
+                            *ngIf="!verifyCredentials(product.team.id) && this.user.userRole == 'USER'">
+                            View
+                        </a>
+                    </div>
+                    <div class="row">
+                        <span class="right" id="user-team-span" *ngIf="verifyCredentials(product.team.id)">
+                            <span id="user-team-txt">
+                                You are part of this team
+                            </span>
+                            <i class="material-icons" id="user-team-pin">
+                                person_pin
+                            </i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More detailed info about product -->
+            <div class="row">
+                <!-- Detailed Scope Div -->
+                <div class="col m6 s12" id="detailed-scope">
+                    <span class="form-title more-info-title">Detailed Scope</span>
+                        <app-product-scope-form [product]="product"></app-product-scope-form>
+
+                    <!-- <div class="row">
+                        <span class="product-info-bold">
+                            Model:
+                        </span>
+                        <span class="product-info">
+                            {{ product.id == productScope.product.id ? productScope.distModel.modelName : "Not assigned" }}
+                        </span>
+                        <span class="product-info-bold">
+                            Region: 
+                        </span>
+                        <span class="product-info">
+                            {{ productScope.distModel && product.id == productScope.product.id ? productScope.distModel.region.regionName : "Not assigned" }}
+                        </span>
+                        <span class="product-info-bold">
+                            Android Version: 
+                        </span>
+                        <span class="product-info">
+                            {{ productScope.so && product.id == productScope.product.id ? productScope.so : "Not assigned"}}
+                        </span>
+                        <span class="product-info-bold">
+                            Comment: 
+                        </span>
+                        <span class="product-info">
+                            {{ productScope.comment && product.id == productScope.product.id ? productScope.comment : "Not assigned"}}
+                        </span>
+                    </div> -->
+                    <!-- <div class="row">
+                        <a (click)="insertScope(product)" data-target="modalScope" 
+                            class="waves-effect waves-light modal-trigger btn btn-view-list light-blue darken-4"
+                            *ngIf="verifyCredentials(product.team.id) || this.user.userRole != 'USER'">
+                            Edit Detailed Scope
+                        </a>
+                    </div> -->
+                </div>
+
+                <!-- Upgrade Div -->
+                <div class="col m6 s12" id="upgrade">
+                    <span class="form-title more-info-title">Upgrade</span>
+                    <app-upgrade-form [product]="product"></app-upgrade-form>
+
+                    <!-- <div class="row">
+                        <span class="product-info-bold">
+                            Type: 
+                        </span>
+
+                        <span class="product-info">
+                            {{   }}
+                        </span>
+                        <span class="product-info-bold">
+                            Release Date: 
+                        </span>
+                        <span class="product-info">
+                            {{   }}
+                        </span>
+                        <span class="product-info-bold">
+                            Change Log: 
+                        </span>
+                        <span class="product-info">
+                            {{  getUpgrades(product.id, "log") }}
+                        </span>
+                    </div> -->
+                    <!-- <div class="row">
+                        <a (click)="insertUpgrade(product)" data-target="modalUpgrade" 
+                            class="waves-effect waves-light modal-trigger btn btn-view-list light-blue darken-4"
+                            *ngIf="verifyCredentials(product.team.id) || this.user.userRole != 'USER'">
+                            Edit Upgrade
+                        </a>
+                    </div> -->
+                </div>
+
+            </div>
+        </li>
+    </ul>
+</div>

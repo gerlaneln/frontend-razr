@@ -1,0 +1,27 @@
+<div id="login-content">
+  <div id="logo">
+    <img src="../assets/img/vector-white.svg" id="logo-motorola" alt="Motorola"/>
+  </div>
+  <h1>Login</h1>
+  <form (ngSubmit)="submit(form)" #form="ngForm" id="login-form">
+    <div class="username-placeholder">
+      <label for="username" id="username" class="label-login">Username</label>
+      <input type="text" name="username" class="input-login" autocomplete="off" [(ngModel)]="user.username" required>
+    </div>
+
+    <label for="password" id="password" class="label-login">Password</label>
+    <input type="password" name="password" class="input-login" [(ngModel)]="user.password" required>
+
+    <!-- <a id="password-link" href="#" target="_blank">Forgot your password?</a> -->
+
+    <div id="login-buttons">
+      <button type="button" class="button" id="sign-up-button" routerLink="/signup">Create an account</button>
+      <input type="submit" class="button" id="login-button" value="Login" [disabled]="form.invalid">
+    </div>
+
+    <div class="progress" *ngIf="this.load == true">
+      <div class="indeterminate"></div>
+    </div>
+
+  </form>
+</div>

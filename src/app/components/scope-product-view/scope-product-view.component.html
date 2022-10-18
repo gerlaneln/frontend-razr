@@ -1,0 +1,50 @@
+<div class="row">
+    <label class="label-form">
+        Android Version: {{ productScope.so ? productScope.so : "Not assigned" }}
+    </label>
+</div>
+
+<div class="row">
+    <label class="label-form">
+        Comment: {{ productScope.comment ? productScope.comment : "Not Assigned" }}
+    </label>
+</div>
+
+<div class="row">
+    <label class="label-form">
+        Model: {{ productScope.distModel ? productScope.distModel.modelName : "Not assigned" }}
+    </label>
+</div>
+
+<div class="row">
+    <label class="label-form">
+        Personnel: {{ productScope.distModel ? productScope.distModel.personnel : "Not assigned" }}
+    </label>
+</div>
+
+<div class="row">
+    <label class="label-form">
+        TA Date: {{ productScope.distModel ? (productScope.distModel.taDate | date:'dd/MM/yyyy') : "Not assigned" }}
+    </label>
+</div>
+
+<div class="row" *ngIf="productScope.distModel != null">
+    <label class="label-form col s4">
+        {{ productScope.distModel.beforeTa }} months before TA
+    </label>
+    <label class="label-form col s3">
+        {{ productScope.distModel.afterTa }} months after TA
+    </label>
+</div>
+
+<div class="row">
+    <label class="label-form">
+        Region: {{ productScope.distModel ? productScope.distModel.region.regionName : "Not assigned" }}
+    </label>
+</div>
+
+<div class="row">
+    <label class="label-form">
+        Phone Company: {{ productScope.distModel ? productScope.distModel.company.companyName : "Not Assigned" }}
+    </label>
+</div>

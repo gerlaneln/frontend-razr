@@ -1,0 +1,137 @@
+<div *ngIf="this.document == false">
+    <app-navigation></app-navigation>
+    <form (ngSubmit)="submit(form)" #form="ngForm" class="entity-form" id="report-form">
+        <h1 class="form-title">Report Request</h1>
+        <div class="line-title"></div>
+
+        <div id="form-content">
+            <div class="row">
+                <div class="col m9 s12">
+                    <label class="label-form required">Select a time frame:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col m4 s12">
+                    <input type="date" id="firstDate" class="input-form" [(ngModel)]="this.firstDate" name="firstDate"
+                        required>
+                </div>
+                <div class="col m4 s12">
+                    <input type="date" id="secondDate" class="input-form" [(ngModel)]="this.secondDate"
+                        name="secondDate" required>
+                </div>
+            </div>
+
+            <!-- Buttons for users that can add and edit Regions -->
+            <div class="form-buttons">
+                <button type="reset" class="btn-form waves-effect waves-light btn red darken-2"
+                    id="btn-clean">Clean</button>
+                <button type="submit" class="btn-form waves-effect waves-light btn green darken-2"
+                    [disabled]="form.invalid">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="this.empty == true">
+    <div class="row">
+        <label class="label-form">
+            Empty report
+        </label>
+    </div>
+</div>
+
+<div *ngIf="this.document == true">
+    <ul class="view-list col s12">
+        <li *ngFor="let product of products" id="li-product">
+
+            <div class="row">
+                <h1 id="product-title" class="form-title">{{product.name}}</h1>
+                <div class="line-title"></div>
+            </div>
+
+            <div class="row">
+                <label class="label-form">
+                    Broadband: {{ product.broadband }}
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="label-form">
+                    Product Family: {{ product.productFamily.nameFamily }}
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="label-form">
+                    Chipset Manufacturer: {{ product.chipset ? product.chipset.manufacturerName : "Not assigned" }}
+                </label>
+            </div>
+            <div class="row">
+                <label class="label-form">
+                    Chipset Name: {{ product.chipset ? product.chipset.chipsetName : "Not assigned"}}
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="label-form">
+                    Life Cycle Status: {{ product.lifeCycleStatus.name }}
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="label-form">
+                    ODM1: {{ product.isODM1? "Yes" : "No" }}
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="label-form">
+                    First SA: {{ product.firstSA | date:'dd/MM/yyyy'}}
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="label-form">
+                    First UG: {{ product.firstUG ? (product.firstUG | date:'dd/MM/yyyy') : "Not Assigned"}}
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="label-form">
+                    GPD Lead: {{ product.gpdLead }}
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="label-form">
+                    NPI Lead: {{ product.npiLead }}
+                </label>
+            </div>
+
+            <div class="row">
+                <label class="label-form">
+                    Team: {{ product.team ? "" : "Not assigned" }}
+                </label>
+                <app-users-team-view [product]="product"></app-users-team-view>
+                
+            </div>
+
+            <div class="row">
+                <h1 class="form-title">
+                    {{product.name}} - Detailed Scope
+                </h1>
+            </div>
+
+            <app-scope-product-view [product]="product"></app-scope-product-view>
+
+            <div class="row">
+                <h1 class="form-title">
+                    {{product.name}} - Upgrade
+                </h1>
+            </div>
+
+            <app-upgrade-product-view [product]="product"></app-upgrade-product-view>
+
+        </li>
+    </ul>
+</div>

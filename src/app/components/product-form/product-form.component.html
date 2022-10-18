@@ -1,0 +1,244 @@
+<app-navigation></app-navigation>
+<form (ngSubmit)="submit(form)" #form="ngForm" id="product-form" enctype="multipart/form-data">
+    <div class="row" id="product-content">
+
+        <!-- Product Info div id="product-left" -->
+        <div class="col m12 s12" >
+
+            <h1 id="product-title" class="form-title">{{product.name ? product.name : "New Product"}}</h1>
+            <div class="line-title"></div>
+
+            <div class="row col m9 s12">
+                <label for="name" class="label-form required">Name: </label>
+                <input type="text" class="input-form" id="name" [(ngModel)]="product.name" 
+                (change)="changeProductName()" name="name" [disabled]="!verifyCredentials() && this.user.userRole == 'USER'" required>
+            </div>
+
+            <div class="row col m9 s12" hidden>
+                <label for="productImage" class="label-form">Image: </label>
+                <input type="file" class="input-form" name="productPhoto" (change)="onFileChanged($event)"
+                    accept="image/*">
+            </div>
+
+            <div class="row">
+                <div class="col m12 s12">
+                    <!-- Broadband select -->
+                    <div class="col m6 s12">
+                        <label class="label-form required">
+                            Broadband:
+                        </label>
+                        <select class="browser-default" id="broadband-select" name="broadband"
+                            [(ngModel)]="product.broadband" [compareWith]="compareByName" required
+                            [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                            <option [ngValue]="null" selected disabled>Choose your option</option>
+                            <option *ngFor="let b of broadband" [ngValue]="b">{{ b }}</option>
+                        </select>
+                    </div>
+
+                    <!-- Phone Family Modal -->
+                    <div id="modalFamily" class="modal">
+                        <app-phone-family-form></app-phone-family-form>
+                    </div>
+
+                    <!-- Product Family select -->
+                    <div class="col m6 s12">
+                        <label class="label-form required">
+                            Product Family:
+                        </label>
+                        <button data-target="modalFamily"
+                                data-position="top" data-tooltip="Insert new Product Family"
+                                class="btn modal-trigger waves-effect waves-indigo btn-flat tooltipped"
+                                [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                            <i class="large material-icons">add</i>
+                        </button>
+                        <button (click)="getFamily()" type="button"
+                                data-position="top" data-tooltip="Refresh Product Family select list"        
+                                class="waves-effect waves-indigo btn-flat tooltipped"
+                                [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                            <i class="large material-icons">autorenew</i>
+                        </button>
+                        <select class="browser-default" id="product-family-select" name="productFamilyFk"
+                            [(ngModel)]="product.productFamily" [compareWith]="compareById" required
+                            [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                            <option [ngValue]="null" selected disabled>Choose your option</option>
+                            <option *ngFor="let f of families" [ngValue]="f">{{ f.nameFamily }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chipset Modal -->
+            <div id="modalChipset" class="modal">
+                <app-chipset-form></app-chipset-form>
+            </div>
+
+            <!-- Life Cycle Modal -->
+            <div id="modalStatus" class="modal">
+                <app-life-cycle-status-form></app-life-cycle-status-form>
+            </div>
+
+            <div class="row">
+
+                <!-- Chipset select -->
+                <div class="col m6 s12">
+                    <label class="label-form">
+                        Chipset:
+                    </label>
+                    <button data-target="modalChipset"
+                            data-position="top" data-tooltip="Insert new Chipset"
+                            class="btn modal-trigger waves-effect waves-indigo btn-flat tooltipped"
+                            [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                        <i class="large material-icons">add</i>
+                    </button>
+                    <button (click)="getChipset()" type="button"
+                            data-position="top" data-tooltip="Refresh Chipset select list"
+                            class="waves-effect waves-indigo btn-flat tooltipped"
+                            [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                        <i class="large material-icons">autorenew</i>
+                    </button>
+                    <select class="browser-default" name="chipset" [(ngModel)]="product.chipset"
+                        [compareWith]="compareById" [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                        <option [ngValue]="null" selected disabled>Choose your option</option>
+                        <option *ngFor="let c of chipsets" [ngValue]="c">{{ c.chipsetName }}</option>
+                    </select>
+                </div>
+
+                <!-- Life Cycle select -->
+                <div class="col m5 s12">
+                    <label class="label-form required">
+                        Life Cycle Status:
+                    </label>
+                    <button data-target="modalStatus"
+                            data-position="top" data-tooltip="Insert new Life Cycle Status"
+                            class="btn modal-trigger waves-effect waves-indigo btn-flat tooltipped" 
+                            [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                        <i class="large material-icons">add</i>
+                    </button>
+                    <button (click)="getStatus()" type="button"
+                            data-position="top" data-tooltip="Refresh Life Status Status select list" 
+                            class="waves-effect waves-indigo btn-flat tooltipped" 
+                            [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                        <i class="large material-icons">autorenew</i>
+                    </button>
+                    <select class="browser-default" id="life-cycle-select" name="lifeCycleStatusFk"
+                        [(ngModel)]="product.lifeCycleStatus" [compareWith]="compareById" required
+                        [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                        <option [ngValue]="null" selected disabled>Choose your option</option>
+                        <option *ngFor="let s of status" [ngValue]="s">{{ s.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m2 s12">
+                    <label class="label-form">
+                        <input type="checkbox" [(ngModel)]="product.isODM1" name="isOdm1" [disabled]="!verifyCredentials() && this.user.userRole == 'USER'"/>
+                        <span class="label-form">ODM1</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m4 s12">
+                    <label for="firstSa" data-position="top" data-tooltip="First Ship Acceptance Date" class="label-form tooltipped required">
+                        First SA: 
+                    </label>
+                    <input name="firstSa" id="first-sa" [(ngModel)]="product.firstSA" type="date" required
+                    [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                </div>
+                <div class="col m4 s12">
+                    <label for="firstUg" data-position="top" data-tooltip="First Upgrade Date" class="label-form tooltipped">
+                        First UG: 
+                    </label>
+                    <input name="firstUg" [(ngModel)]="product.firstUG" type="date" 
+                    [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="gpdLead" data-position="top" data-tooltip="Global Project Deployment Lead" class="label-form tooltipped required">
+                    GPD Lead: 
+                </label>
+                <input type="text" class="input-form" id="gpd-lead" [(ngModel)]="product.gpdLead" name="gpdLead"
+                    required [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+            </div>
+
+            <div class="row">
+                <label for="npiLead" data-position="top" data-tooltip="New Product Introduction Lead" class="label-form tooltipped required">
+                    NPI Lead: 
+                </label>
+                <input type="text" class="input-form" id="npi-lead" [(ngModel)]="product.npiLead" name="npiLead"
+                    required [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+            </div>
+
+            <!-- Team Modal -->
+            <div id="modalTeam" class="modal">
+                <app-team-form [team]="this.team"></app-team-form>
+            </div>
+
+            <!-- Insert Team after team creation -->
+            <div id="modalUsers" class="modal">
+                <app-insert-team-users [team]="this.team"></app-insert-team-users>
+            </div>
+
+            <!-- Team div -->
+            <div class="row">
+                <label class="label-form required">
+                    Team:
+                </label>
+                <button data-target="modalTeam" (click)="insertTeam()"
+                        class="btn modal-trigger waves-effect waves-indigo btn-flat" 
+                        *ngIf="this.hasTeam == false" [disabled]="!verifyCredentials() && this.user.userRole == 'USER' && !this.product.name || !this.product.name">
+                    <i class="tooltipped large material-icons" data-position="top" data-tooltip="Create a new Team for this product">
+                        add
+                    </i>
+                </button>
+                <button (click)="getUsersTeam()" type="button"
+                        data-position="top" data-tooltip="Refresh the list of Users working on this product" 
+                        class="waves-effect waves-indigo btn-flat tooltipped" [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                    <i class="large material-icons">autorenew</i>
+                </button>
+                <button data-target="modalUsers"
+                        class="btn modal-trigger waves-effect waves-indigo btn-flat" 
+                        *ngIf="this.hasTeam" 
+                        [disabled]="!verifyCredentials() && this.user.userRole == 'USER'">
+                        <span class="tooltipped" data-position="top" data-tooltip="Insert new Users on this team">
+                            <i class="large material-icons">
+                                group_add
+                            </i>
+                        </span>
+                </button>
+                
+                <ul id="teamFormation">
+                    <li *ngFor="let user of usersTeam">
+                        {{user.name}} - {{user.userRole}}
+                        <button class="deleteUserList" 
+                                (click)="deleteFormationByUserAndTeam(user.id, this.idTeam)"
+                                *ngIf="(this.oneUserTeam == false && this.idProduct != 0)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row" id="product-buttons" *ngIf="verifyCredentials() || this.user.userRole != 'USER'">
+                <button type="reset" class="btn-form waves-effect waves-light btn red darken-2"
+                    id="btn-clean">Clean</button>
+                <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save"
+                    value="Save" [disabled]="form.invalid">Save</button>
+            </div>
+            <div class="row" id="product-buttons" *ngIf="!verifyCredentials() && this.user.userRole == 'USER'">
+                <a routerLink="/product" class="btn-form waves-effect waves-light btn indigo darken-4"
+                    id="btn-clean">
+                    Back to list
+                </a>
+            </div>
+        </div>
+
+        <!-- Product image div -->
+        <!-- <div class="col m3 s12" id="product-image" hidden>
+            <img class="col m4 s12" id="image"
+                src="https://images-americanas.b2w.io/produtos/01/00/img/3171319/3/3171319323_1SZ.jpg">
+        </div> -->
+    </div>
+</form>

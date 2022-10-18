@@ -1,0 +1,16 @@
+<div class="navbar-content"  appClickOuside (clickedOutside)="toggleMenuOff()">
+  <div class="bar">
+    <div class="nav-title">Product Manager</div>
+    <div class="user-related" #toggleButton (click)="toggleMenu()">
+      <i class="material-icons nav-option-icon" id="user-icon">account_circle</i>
+    </div>
+    <div class="inner-bar">
+      <div id="nav-modal" *ngIf="menuToggle">
+          <ul class="menu">
+            <li class="modal-option"><a href="#">teams</a></li>
+            <li class="modal-option"><a href="/logout">logout</a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<form (ngSubmit)="submit(form)" #form="ngForm" class="entity-form" id="user-form">
+    <h1 class="form-title">New User</h1>
+    <div class="line-title"></div>
+
+    <div id="form-content">
+
+        <div class="col m9 s12">
+            <label for="name" class="label-form required">Name: </label>
+            <input type="text" class="input-form" [(ngModel)]="user.name" name="name" id="name" required>
+        </div>
+
+        <div class="col m9 s12">
+            <label for="username" class="label-form required">Username: </label>
+            <input type="text" class="input-form" [(ngModel)]="user.username" name="username" id="username" required>
+        </div>
+
+        <div class="col m9 s12">
+            <label for="email" class="label-form required">E-mail: </label>
+            <input type="email" class="input-form" [(ngModel)]="user.email" name="email" id="email" required>
+        </div>
+
+        <div class="col m9 s12">
+            <label for="password" class="label-form">Password: </label>
+            <input type="password" class="input-form" placeholder="{{this.passwordEdit}}" id="password"
+                [(ngModel)]="user.password" name="password">
+        </div>
+
+        <div class="col m9 s12">
+            <label for="confirmPassword" class="label-form">Confirm password: </label>
+            <input type="password" class="input-form" [(ngModel)]="this.password" id="cpassword" name="confirmPassword">
+        </div>
+
+        <div class="row">
+            <div class="select-div">
+                <div class="col m8 s12">
+                    <label class="label-form required">User role: </label>
+                    <select class="browser-default" id="role-select" name="region" [(ngModel)]="user.userRole"
+                        [compareWith]="compareByName">
+                        <option [ngValue]="null" selected disabled>Choose your option</option>
+                        <option value="USER">User</option>
+                        <option value="MANAGER">Manager</option>
+                        <option value="ADMIN">Administrator</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col m2 s12">
+                <label class="label-form" id="checkbox-user">
+                    <input type="checkbox" [(ngModel)]="user.active" name="isActive" />
+                    <span class="label-form" id="checkbox-span">Active</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Buttons for users that can add and edit User -->
+        <div class="form-buttons">
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean" *ngIf="this.user1.userRole != 'USER'">
+                Clean
+            </button>
+            <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save" *ngIf="this.user1.userRole != 'USER'" value="Save" [disabled]="form.invalid">
+                Save
+            </button>
+        </div>
+    </div>
+
+</form>

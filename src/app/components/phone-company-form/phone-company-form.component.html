@@ -1,0 +1,36 @@
+<form (ngSubmit)="submit(form)" #form="ngForm" class="entity-form" id="phone-company-form">
+    <h1 class="form-title">New Phone Company</h1>
+    <div class="line-title"></div>
+
+    <div id="form-content">
+        
+        <div class="row">
+            <div class="col m9 s12">
+                <label for="companyName" class="label-form required">Company Name: </label>
+                <input type="text" class="input-form" id="company-name" [(ngModel)]="company.companyName" name="companyName" required>
+            </div>
+            <div class="col m2 s12">
+                <label class="label-form">
+                    <input type="checkbox" [(ngModel)]="company.isMV" name="isMV"/>
+                    <span class="label-form" class="nav-option-icon tooltipped" data-position="right" data-tooltip="isMv">MV</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="row select-div">
+            <div class="col m8 s12">
+                <label class="label-form required">Region: </label>
+                <select class="browser-default" id="region" name="region" [(ngModel)]="company.region" [compareWith]="compareById">
+                    <option [value]="null">Select the Region</option>
+                    <option *ngFor="let e of region" [ngValue]="e">{{e.regionName}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-buttons">
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean" *ngIf="this.user.userRole != 'USER'">Clean</button>
+            <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save" *ngIf="this.user.userRole != 'USER'" value="Save" [disabled]="form.invalid">Save</button>
+        </div>
+    </div>
+
+</form>

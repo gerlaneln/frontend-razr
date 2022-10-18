@@ -1,0 +1,7 @@
+<ul *ngIf="product.team">
+    <li *ngFor="let user of usersFromTeam" class="user-list col s9">
+        <label class="label-form">
+            {{user.name}} ({{user.username}}) - {{user.userRole}}
+        </label>
+    </li>
+</ul>

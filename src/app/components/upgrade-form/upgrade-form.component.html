@@ -1,0 +1,32 @@
+<form (ngSubmit)="submit(form)" #form="ngForm" id="upgrade-form">
+    <!-- <h1 class="form-title">New Upgrade</h1>
+    <div class="line-title"></div> -->
+
+    <div id="form-content">
+        <div class="row">
+            <label class="label-form">
+                Product: {{product.name}}
+            </label>
+            <input type="text" [value]="product" [(ngModel)]="upgrade.product" [ngModelOptions]="{standalone: true}" hidden>
+        </div>
+        <div class="row">
+            <label for="upgradeType" class="label-form required">Upgrade Type: </label>
+            <input type="text" class="input-form" id="upgrade-type" [(ngModel)]="upgrade.upgradeType" name="upgradeType">
+        </div>
+        <div class="row">
+            <label for="releaseDate" class="label-form required">Release Date: </label>
+            <input type="date" class="input-form" id="release-date" [(ngModel)]="upgrade.releaseDate" name="releaseDate">
+        </div>
+        <div class="row">
+            <label for="changeLog" class="label-form">Change Log: </label>
+            <textarea id="changeLogText" class="materialize-textarea" [(ngModel)]="upgrade.changeLog" name="changeLog" data-length="200"></textarea>
+        </div>
+
+        <!-- Buttons for users that can add and edit Upgrade -->
+        <div class="form-buttons row">
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean">Clean</button>
+            <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save" value="Save" [disabled]="form.invalid">Save</button>
+        </div>
+    </div>
+
+</form>

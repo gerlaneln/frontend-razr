@@ -1,0 +1,132 @@
+<div id="navbar">
+    <div class="navbar-content"  appClickOuside (clickedOutside)="toggleMenuOff()">
+        <div class="bar">
+            <a href="#" id="mobile-trigger" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
+            <!-- <div id="inner-bar"> -->
+                <div class="nav-title">Product Manager</div>
+              <!-- <div class="user-related" #toggleButton (click)="toggleMenu()">
+                <i class="material-icons nav-option-icon" id="user-icon">account_circle</i>
+              </div> -->
+                <div id="user-area" class="tooltipped" data-position="bottom" data-tooltip="Logout">
+                    <label for="user" id="username">{{ user.username }}</label>
+                    <a (click)="logout()" id="logout-btn">
+                        <i class="material-icons">exit_to_app</i>
+                    </a>
+                </div>
+            <!-- </div> -->
+
+            <!-- <div class="inner-bar">
+            <div id="nav-modal" *ngIf="menuToggle">
+                <ul class="menu">
+                  <li class="modal-option"><a href="#">teams</a></li>
+                  <li class="modal-option"><a href="/logout">logout</a></li>
+                </ul>
+            </div>
+          </div> -->
+        </div>
+        <!-- <div id="mobile"> -->
+            <ul class="sidenav" id="mobile">
+                <li><a href="/home">Home</a></li>
+                <li><a href="/chipset">Chipset</a></li>
+                <li><a href="/model">Distribution Model</a></li>
+                <li><a href="/company">Phone Company</a></li>
+                <li><a href="/product">Product</a></li>
+                <li><a href="/family">Product Family</a></li>
+                <li><a href="/region">Region</a></li>
+                <li *ngIf="this.user.userRole != 'USER'"><a href="/report">Report</a></li>
+                <li><a href="/user">User</a></li>
+                <li id="li-side-username"><label id="side-username" for="user">{{ user.username }}</label></li>
+                <li><a (click)="logout()">Logout</a></li>
+            </ul>
+        <!-- </div> -->
+    </div>
+
+</div>
+
+
+<div id="sidenav">
+    <nav [ngClass]="collapsed ? 'nav' : 'sidenav-collapsed'"appClickOuside (clickedOutside)="toggleSideNavOff()">
+        <div class="nav-head">
+            <a class="logo-link" (click)="toggleCollapse()">
+                <img src="../assets/img/vector-m-white.svg"    class="logo-img tooltipped" data-position="right" data-tooltip="Click to expand" alt="Motorola"/>
+            </a>
+            <!-- <a *ngIf="collapsed">
+                <i class="close-btn material-icons" *ngIf="collapsed" (click)="closeSidenav()">close</i>
+            </a> -->
+        </div>
+        <!-- botão dispensavel? -->
+        <!-- <a class="close-btn btn-floating waves-effect waves-light white" id="btn-close" *ngIf="collapsed"> -->
+
+            <!-- </a>   -->
+            <div class="nav-content hide-on-med-and-down">
+                <!-- <div class="nav-content" *ngIf="collapsed" [ngStyle]="{'background': 'red'}"> -->
+                    <ul class="nav-list">
+                        <li class="nav-options">
+                            <a href="/home" class="nav-option-link">
+                                <i class="material-icons nav-option-icon tooltipped" data-position="right" data-tooltip="Home">home</i>
+                                <span class="sidenav-label" @fadeInOut *ngIf="collapsed">Home</span>
+                            </a>
+                </li>
+
+                <li class="nav-options">
+                    <a href="/chipset" class="nav-option-link">
+                        <i class="material-icons nav-option-icon tooltipped" data-position="right" data-tooltip="Chipset">developer_board</i>
+                        <span class="sidenav-label" @fadeInOut *ngIf="collapsed">Chipset</span>
+                    </a>
+                </li>
+
+                <li class="nav-options">
+                    <a href="/model" class="nav-option-link">
+                        <i class="material-icons nav-option-icon tooltipped" data-position="right" data-tooltip="Distribution Model">dashboard</i>
+                        <span class="sidenav-label" @fadeInOut *ngIf="collapsed">Distribution Model</span>
+                    </a>
+                </li>
+
+                <li class="nav-options">
+                    <a href="/company" class="nav-option-link">
+                        <i class="material-icons nav-option-icon tooltipped" data-position="right" data-tooltip="Phone Company">sim_card</i>
+                        <span class="sidenav-label" @fadeInOut *ngIf="collapsed">Phone Company</span>
+                    </a>
+                </li>
+
+                <li class="nav-options">
+                    <a href="/product" class="nav-option-link">
+                        <i class="material-icons nav-option-icon tooltipped" data-position="right" data-tooltip="Product">phone_android</i>
+                        <span class="sidenav-label" @fadeInOut *ngIf="collapsed">Product</span>
+                    </a>
+                </li>
+
+                <li class="nav-options">
+                    <a href="/family" class="nav-option-link">
+                        <i class="material-icons nav-option-icon tooltipped" data-position="right" data-tooltip="Product Family">phonelink_setup</i>
+                        <span class="sidenav-label" @fadeInOut *ngIf="collapsed">Phone Family</span>
+                    </a>
+                </li>
+
+                <li class="nav-options">
+                    <a href="/region" class="nav-option-link">
+                        <i class="material-icons nav-option-icon tooltipped" data-position="right" data-tooltip="Region">language</i>
+                        <span class="sidenav-label" @fadeInOut *ngIf="collapsed">Region</span>
+                    </a>
+                </li>
+
+                <li class="nav-options" *ngIf="this.user.userRole != 'USER'">
+                    <a href="/report" class="nav-option-link">
+                        <i class="material-icons nav-option-icon tooltipped" data-position="right" data-tooltip="Report">text_format</i>
+                        <span class="sidenav-label" @fadeInOut *ngIf="collapsed">Report</span>
+                    </a>
+                </li>
+
+                <li class="nav-options">
+                    <a href="/user" class="nav-option-link">
+                        <i class="material-icons nav-option-icon tooltipped" data-position="right" data-tooltip="User">people</i>
+                        <span class="sidenav-label" @fadeInOut *ngIf="collapsed">User</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+</div>

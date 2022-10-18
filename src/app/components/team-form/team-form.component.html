@@ -1,0 +1,57 @@
+<form (ngSubmit)="submit(form)" id="team-form" class="entity-form" #form="ngForm">
+    <h1 class="form-title">New Team</h1>
+    <div class="line-title"></div>
+
+    <div id="form-content">
+        <!-- User Form Modal -->
+        <div id="modalUser" class="modal">
+            <app-user-form></app-user-form>
+        </div>
+
+        <div class="row">
+            <label class="label-form">
+                Team: {{team.name}}
+            </label>
+            <input type="text" [value]="team" [(ngModel)]="teamFormation.team" [ngModelOptions]="{standalone: true}" hidden>
+        </div>
+
+        <!-- User select div -->
+        <div class="row">
+            <label class="label-form required">
+                User:
+            </label>
+            <button data-target="modalUser" class="btn modal-trigger waves-effect waves-indigo btn-flat">
+                <i class="large material-icons">add</i>
+            </button>
+            <button (click)="getUsers()" type="button" class="waves-effect waves-indigo btn-flat">
+                <i class="large material-icons">autorenew</i>
+            </button>
+            <select class="browser-default" id="team-user-select" name="user" [(ngModel)]="teamFormation.user"
+                (change)="insertOnTeam(teamFormation.user)">
+                <option [ngValue]="null" selected disabled>Choose your option</option>
+                <option *ngFor="let u of users" [ngValue]="u">{{ u.name }}</option>
+            </select>
+            
+            <ul id="teamFormation">
+                <li *ngFor="let user of usersTeam">
+                    {{user.name}} - {{user.userRole}}
+                    <button class="deleteUserList" 
+                            (click)="deleteFromTeam(user, usersTeam.indexOf(user))"
+                            *ngIf="this.oneUserTeam == false">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+        <div class="row form-buttons">
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2"
+                id="btn-clean">Clean</button>
+            <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save"
+                value="Save" [disabled]="form.invalid">Save</button>
+        </div>
+    </div>
+</form>
