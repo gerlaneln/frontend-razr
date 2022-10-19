@@ -5,6 +5,8 @@ import { LifeCycleStatusService } from 'src/app/services/life-cycle-status.servi
 import JustValidate from 'just-validate';
 import { Rules } from 'just-validate/dist/modules/interfaces';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-life-cycle-status-form',
@@ -15,11 +17,24 @@ import { ToastrService } from 'ngx-toastr';
 export class LifeCycleStatusFormComponent implements OnInit {
   constructor(
     private service: LifeCycleStatusService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private userService: UserService
   ) {}
 
   status: LifeCycleStatus = <LifeCycleStatus>{};
   loggedUser: number = 0;
+  user: User = <User>{};
+
+  getUser(): void{
+    /*
+      Get the teams that are assigned to that user
+    */
+    this.userService.getById(JSON.parse(sessionStorage.getItem('user') || '{}')).subscribe({
+      next: (res: User) => {
+        this.user = res;
+      }
+    })
+  }
 
   /*
     The submit function also checks what user is logged, so the backend can assign the changes on the log

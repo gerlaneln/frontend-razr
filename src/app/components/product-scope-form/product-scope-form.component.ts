@@ -10,6 +10,8 @@ import { Utils } from 'src/app/utils/utils';
 import JustValidate from 'just-validate';
 import { Rules } from 'just-validate/dist/modules/interfaces';
 import { ToastrService } from 'ngx-toastr';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class ProductScopeFormComponent implements OnInit, OnChanges {
 
   constructor(
     private service: ProductScopeService,
-    private productService: ProductService,
+    private userService: UserService,
     private modelService: DistribuitionModelService,
     private toastrService: ToastrService
 
@@ -43,9 +45,22 @@ export class ProductScopeFormComponent implements OnInit, OnChanges {
 
   loggedUser: number = 0;
 
+  user: User = <User>{};
+
   // product: Product = <Product>{};
   productScope: ProductScope = <ProductScope>{};
   models: Distribuition[] = Array<Distribuition>();
+
+  getUser(): void{
+    /*
+      Get the teams that are assigned to that user
+    */
+    this.userService.getById(JSON.parse(sessionStorage.getItem('user') || '{}')).subscribe({
+      next: (res: User) => {
+        this.user = res;
+      }
+    })
+  }
 
   /* 
     Id is sent from the product-view output to the input.

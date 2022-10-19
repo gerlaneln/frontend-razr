@@ -40,9 +40,11 @@ export class DistModelViewComponent implements OnInit {
       }
     });
   }
+
   user: User = <User>{};
-  teams: Team[] = Array<Team>(); 
-  get1(): void{
+  teams: Team[] = Array<Team>();
+
+  getUser(): void{
     /*
       Get the teams that are assigned to that user
     */
@@ -75,7 +77,7 @@ export class DistModelViewComponent implements OnInit {
     M.Modal.init(modal, options);
 
     this.get();
-    this.get1();
+    this.getUser();
   }
 
 }

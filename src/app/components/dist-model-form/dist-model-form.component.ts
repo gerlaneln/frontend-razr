@@ -48,7 +48,8 @@ export class DistModelFormComponent implements OnInit, OnChanges {
   model: Distribuition = <Distribuition>{};
   user: User = <User>{};
   teams: Team[] = Array<Team>(); 
-  get(): void{
+
+  getUser(): void{
     /*
       Get the teams that are assigned to that user
     */
@@ -94,13 +95,15 @@ export class DistModelFormComponent implements OnInit, OnChanges {
     Only Phone Companies from that Region can be acessed
   */
   getPhoneCompanies(region: Region):void{
-    this.companyService.getByRegion(region.id).subscribe({
-      next: (res: PhoneCompany[]) => {
-        if(res){
-          this.phoneCompanies = res;
+    if(region != null){
+      this.companyService.getByRegion(region.id).subscribe({
+        next: (res: PhoneCompany[]) => {
+          if(res.length > 0){
+            this.phoneCompanies = res;
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   submit(form: NgForm): void {
@@ -133,15 +136,14 @@ export class DistModelFormComponent implements OnInit, OnChanges {
     Select has to be initializated
   */
   ngOnInit(): void {
-    this.get();
+    this.getUser();
     const select = document.querySelectorAll('select');
     const options = {};
     M.FormSelect.init(select, options);
     this.regionService.getAll().subscribe({
       next: (res: Region[]) => {
         this.regions = res;
-        console.log(res);
-      },
+      }
     });
 
     this.edit(this.id);

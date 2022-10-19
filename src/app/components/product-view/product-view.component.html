@@ -98,76 +98,15 @@
                 <!-- Detailed Scope Div -->
                 <div class="col m6 s12" id="detailed-scope">
                     <span class="form-title more-info-title">Detailed Scope</span>
-                        <app-product-scope-form [product]="product"></app-product-scope-form>
-
-                    <!-- <div class="row">
-                        <span class="product-info-bold">
-                            Model:
-                        </span>
-                        <span class="product-info">
-                            {{ product.id == productScope.product.id ? productScope.distModel.modelName : "Not assigned" }}
-                        </span>
-                        <span class="product-info-bold">
-                            Region: 
-                        </span>
-                        <span class="product-info">
-                            {{ productScope.distModel && product.id == productScope.product.id ? productScope.distModel.region.regionName : "Not assigned" }}
-                        </span>
-                        <span class="product-info-bold">
-                            Android Version: 
-                        </span>
-                        <span class="product-info">
-                            {{ productScope.so && product.id == productScope.product.id ? productScope.so : "Not assigned"}}
-                        </span>
-                        <span class="product-info-bold">
-                            Comment: 
-                        </span>
-                        <span class="product-info">
-                            {{ productScope.comment && product.id == productScope.product.id ? productScope.comment : "Not assigned"}}
-                        </span>
-                    </div> -->
-                    <!-- <div class="row">
-                        <a (click)="insertScope(product)" data-target="modalScope" 
-                            class="waves-effect waves-light modal-trigger btn btn-view-list light-blue darken-4"
-                            *ngIf="verifyCredentials(product.team.id) || this.user.userRole != 'USER'">
-                            Edit Detailed Scope
-                        </a>
-                    </div> -->
+                        
+                    <app-product-scope-form [product]="product"></app-product-scope-form>
                 </div>
 
                 <!-- Upgrade Div -->
                 <div class="col m6 s12" id="upgrade">
                     <span class="form-title more-info-title">Upgrade</span>
+                    
                     <app-upgrade-form [product]="product"></app-upgrade-form>
-
-                    <!-- <div class="row">
-                        <span class="product-info-bold">
-                            Type: 
-                        </span>
-
-                        <span class="product-info">
-                            {{   }}
-                        </span>
-                        <span class="product-info-bold">
-                            Release Date: 
-                        </span>
-                        <span class="product-info">
-                            {{   }}
-                        </span>
-                        <span class="product-info-bold">
-                            Change Log: 
-                        </span>
-                        <span class="product-info">
-                            {{  getUpgrades(product.id, "log") }}
-                        </span>
-                    </div> -->
-                    <!-- <div class="row">
-                        <a (click)="insertUpgrade(product)" data-target="modalUpgrade" 
-                            class="waves-effect waves-light modal-trigger btn btn-view-list light-blue darken-4"
-                            *ngIf="verifyCredentials(product.team.id) || this.user.userRole != 'USER'">
-                            Edit Upgrade
-                        </a>
-                    </div> -->
                 </div>
 
             </div>

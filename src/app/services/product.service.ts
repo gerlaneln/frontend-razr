@@ -22,6 +22,10 @@ export class ProductService {
     return this.http.get<Product>(this.api+'/product/'+id);
   }
 
+  getReport(firstDate: string, secondDate: string): Observable<Product[]>{
+    return this.http.get<Product[]>(this.api+'/product/seach/products/'+firstDate+'/'+secondDate+'/');
+  }
+
   insert(id: number, object: Product): Observable<Product>{
     return this.http.post<Product>(this.api+'/log/'+id+'/product/', object);
   }

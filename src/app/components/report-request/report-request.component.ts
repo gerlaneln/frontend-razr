@@ -63,7 +63,7 @@ export class ReportRequestComponent implements OnInit {
     dateTwo = new Date(dateTwo.getTime() + dateTwo.getTimezoneOffset() * 60 * 1000);
     this.secondDate = dateTwo.toISOString().slice(0, 10);
 
-    this.productService.getAll().subscribe({
+    this.productService.getReport(this.firstDate, this.secondDate).subscribe({
       next: (res: Product[]) => {
         if(res.length > 0){
           this.document = true;

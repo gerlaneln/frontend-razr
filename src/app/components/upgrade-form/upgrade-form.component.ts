@@ -5,8 +5,10 @@ import { Rules } from 'just-validate/dist/modules/interfaces';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/product';
 import { Upgrade } from 'src/app/models/upgrade';
+import { User } from 'src/app/models/user';
 import { ProductService } from 'src/app/services/product.service';
 import { UpgradeService } from 'src/app/services/upgrade.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-upgrade-form',
@@ -18,12 +20,24 @@ export class UpgradeFormComponent implements OnInit, OnChanges {
 
   constructor(
     private service: UpgradeService,
-    private productService: ProductService,
+    private userService: UserService,
     private toastrService: ToastrService
   ) { }
 
   loggedUser: number = 0;
   upgrade: Upgrade = <Upgrade>{};
+  user: User = <User>{}
+
+  getUser(): void{
+    /*
+      Get the teams that are assigned to that user
+    */
+    this.userService.getById(JSON.parse(sessionStorage.getItem('user') || '{}')).subscribe({
+      next: (res: User) => {
+        this.user = res;
+      }
+    })
+  }
 
   /* 
     Id is sent from the product-form output to the input.

@@ -7,7 +7,9 @@
         </div>
         <div class="header-view-btn right">
             <!-- Modal call to add new Region -->
-            <button id="modal-view" (click)="edit(0)" data-target="modal" class="m5 s5 waves-effect waves-light btn modal-trigger indigo darken-4">
+            <button id="modal-view" (click)="edit(0)" data-target="modal" 
+                    class="m5 s5 waves-effect waves-light btn modal-trigger indigo darken-4"
+                    *ngIf="this.user.userRole != 'USER'">
                 New Region
             </button>
             <!-- Update view with new Regions -->

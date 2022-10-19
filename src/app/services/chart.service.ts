@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import * as data from '../../assets/data/teste.json';
-import * as categories from '../../assets/data/categories.json';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ChartData } from '../models/chart-data.model';
@@ -13,18 +11,12 @@ export class ChartService {
 
   api: string = environment.apiUrl;
 
-  private data = data;
-  private category = categories;
-
   constructor(private http: HttpClient) {}
 
   loadDataChart(id: number): Observable<ChartData>{
-    return this.http.get<ChartData>(this.api+'/chart_data/load_chart'+id);
+    return this.http.get<ChartData>(this.api+'/chart_data/load_chart/'+id);
   }
 
-  getData(): Observable<object[]> {
-    return of(this.data);
-  }
 }
 
 /*

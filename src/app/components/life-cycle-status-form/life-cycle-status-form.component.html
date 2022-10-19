@@ -11,8 +11,14 @@
 
         </div>
         <div class="form-buttons">
-            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean">Clean</button>
-            <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save" value="Save" [disabled]="form.invalid">Save</button>
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean"
+                    *ngIf="this.user.userRole != 'USER'">
+                Clean
+            </button>
+            <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save"
+                    value="Save" [disabled]="form.invalid" *ngIf="this.user.userRole != 'USER'">
+                Save
+            </button>
         </div>
     </div>
 

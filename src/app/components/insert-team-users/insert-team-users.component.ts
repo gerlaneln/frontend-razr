@@ -36,6 +36,17 @@ export class InsertTeamUsersComponent implements OnInit, OnChanges {
   teamFormation: TeamFormation = <TeamFormation>{};
   oneUserTeam: boolean = false;
 
+  getUser(): void{
+    /*
+      Get the teams that are assigned to that user
+    */
+    this.userService.getById(JSON.parse(sessionStorage.getItem('user') || '{}')).subscribe({
+      next: (res: User) => {
+        this.user = res;
+      }
+    })
+  }
+
   @Input() team: Team = <Team>{};
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -125,6 +136,7 @@ export class InsertTeamUsersComponent implements OnInit, OnChanges {
     M.Modal.init(modal, options);
 
     this.getAllUsers();
+    this.getUser();
     this.availableUsers = [];
 
     /*

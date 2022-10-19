@@ -40,7 +40,19 @@ export class TeamFormComponent implements OnInit, OnChanges {
   usersTeam: User[] = Array<User>();
   teamFormation: TeamFormation = <TeamFormation>{};
   users: User[] = Array<User>();
+  user: User = <User>{};
   oneUserTeam: boolean = false;
+
+  getUser(): void{
+    /*
+      Get the teams that are assigned to that user
+    */
+    this.userService.getById(JSON.parse(sessionStorage.getItem('user') || '{}')).subscribe({
+      next: (res: User) => {
+        this.user = res;
+      }
+    })
+  }
 
   /* 
     Team is sent from the product-form output to the input.

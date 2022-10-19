@@ -11,45 +11,14 @@
                     ({{this.user.username}} - {{this.user.userRole}})
                 </div>
 
-
                 <span class="team-user-txt">teams you are part of</span>
 
-                <!-- <div id="collapse-icon" hidden> +{{ this.collapseString }}
-                    <i class="material-icons" *ngIf="this.open == false">expand_more</i>
-                    <i class="material-icons" *ngIf="this.open == true">expand_less</i>
-                </div> -->
             </div>
             <div class="collapsible-body">
                 <ul>
                     <li *ngFor="let t of teams">{{t.name}}</li>
                 </ul>
-                <!-- <span>
-                    Lorem ipsum dolor sit amet.
-                </span> -->
             </div>
         </li>
-        <!-- <li>
-          <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li>
-        <li>
-          <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
-          <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-        </li> -->
     </ul>
-    <!-- <div>
-        <h2 id="team-user">
-            {{this.user.name}}
-            <span class="team-user-txt">
-                ({{this.user.username}})
-            </span>
-        </h2>
-        <span class="team-user-txt">Role: {{this.user.userRole}}</span>
-    </div>
-    <div id="team-container">
-        <span class="team-user-txt">The teams you are part of: </span>
-        <ul>
-            <li *ngFor="let t of teams">{{t.name}}</li>
-        </ul>
-    </div> -->
 </div>

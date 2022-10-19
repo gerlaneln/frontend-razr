@@ -133,18 +133,18 @@ export class ProductFormComponent implements OnInit, OnChanges {
   /*
     Image treatment
   */
-  selectedImage: any;
-  async onFileChanged(event: any): Promise<void>{
-    this.selectedImage = event.target.files[0];
-    this.selectedImage.arrayBuffer().then((resp: Iterable<number>) => {
-      let ui8 = new Uint8Array(resp);
-      console.log(ui8);
-      let rawData = [...ui8];
-      console.log(rawData);
-      this.product.productPhoto = new Blob([new Uint8Array(rawData)], {type:'image/*'});
-      // console.log(this.product.productPhoto);
-    });
-  }
+  // selectedImage: any;
+  // async onFileChanged(event: any): Promise<void>{
+  //   this.selectedImage = event.target.files[0];
+  //   this.selectedImage.arrayBuffer().then((resp: Iterable<number>) => {
+  //     let ui8 = new Uint8Array(resp);
+  //     console.log(ui8);
+  //     let rawData = [...ui8];
+  //     console.log(rawData);
+  //     this.product.productPhoto = new Blob([new Uint8Array(rawData)], {type:'image/*'});
+  //     // console.log(this.product.productPhoto);
+  //   });
+  // }
 
   /*
     Delete user from the team of this product
