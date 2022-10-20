@@ -68,7 +68,7 @@ export class ChartComponent {
     let dataX: any = [];
     let categoryX: any = [];
     this.http
-      .get('https://localhost:9000/chart_data/load_chart/' + id)
+      .get('https://backend-razr.herokuapp.com/chart_data/load_chart/' + id)
       .subscribe((res) => {
         this.holder = res;
         dataX = this.holder.jsonarray
