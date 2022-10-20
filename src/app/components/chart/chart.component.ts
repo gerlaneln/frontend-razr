@@ -48,8 +48,10 @@ export class ChartComponent {
     }
   }
 
+  //a
+
   holder: any;
-  holders = [];
+  // holders = [];
 
   ngOnInit() {}
 
@@ -62,32 +64,49 @@ export class ChartComponent {
     // Data fetching from api
     let data: any = [];
     let category: any = [];
+    
+    let dataX: any = [];
+    let categoryX: any = [];
     this.http
-      .get('https://backend-razr.herokuapp.com/chart_data/load_chart/' + id)
+      .get('https://localhost:9000/chart_data/load_chart/' + id)
       .subscribe((res) => {
         this.holder = res;
-        this.holders = this.holder.list;
-        Object.entries(res).forEach(([key, value]) => {
-          this.content = `${key}: ${value}`;
-        });
-        console.log('teste', this.content.split('jsonarray'));
-        console.log('teste res', res);
-
-        // parses and fill the chart with data
-        this.content = this.content.replace('undefinedjsonarray: ', '');
-        this.content = this.content.replace('jsonarray: ', '');
-        this.content = this.content.replace('categoriesArray: ', '');
-        this.content = this.content.slice(0, -4) + '\n]';
-        category = JSON.parse(this.content);
-        console.log('category ', category);
-
+        dataX = this.holder.jsonarray
+        categoryX = this.holder.categoriesArray
+        
+        
         // parses and insert on the category variable
-        this.category = res;
-        this.category = Object.values(this.category)[0];
-        this.category = this.category.slice(0, -3) + '\n]';
-        this.category = this.category.slice(0, -3) + '}\n]';
-        data = JSON.parse(this.category);
-        console.log('data ', data);
+        categoryX = categoryX.slice(0, -5) + '}]';
+        category = JSON.parse(categoryX)  
+        // parses and fill the chart with data
+        dataX = dataX.slice(0, -3) + ']';
+        data = JSON.parse(dataX)
+        
+        console.log('AGORA FOI? data ',typeof(data))
+        console.log('AGORA FOI? cate ',typeof(category))
+        
+        console.log('AGORA FOI? data ',(data))
+        console.log('AGORA FOI? cate ',(category))
+        
+        
+        // this.holders = this.holder.list;
+        // Object.entries(res).forEach(([key, value]) => {
+        //   this.content = `${key}: ${value}`;
+        // });
+        // this.content = this.content.replace('undefinedjsonarray: ', '');
+        // this.content = this.content.replace('jsonarray: ', '');
+        // this.content = this.content.replace('categoriesArray: ', '');
+        // this.content = this.content.slice(0, -4) + '\n]';
+        // category = JSON.parse(this.content);
+        // console.log('category ', category);
+
+        // this.category = res;
+        // this.category = Object.values(this.category)[0];
+        // this.category = this.category.slice(0, -3) + '\n]';
+        // this.category = this.category.slice(0, -3) + '}\n]';
+        // data = JSON.parse(this.category);
+        // console.log('data ', data);
+        // console.log('data ', typeof(data));
 
         var root = am5.Root.new('chartdiv');
         root.dateFormatter.setAll({
