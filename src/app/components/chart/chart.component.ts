@@ -59,7 +59,6 @@ export class ChartComponent {
   ngAfterViewInit() {
     // gets the user id from the storage
     const id = JSON.parse(sessionStorage.getItem('user') || '{}');
-    console.log(id);
 
     // Data fetching from api
     let data: any = [];
@@ -68,7 +67,7 @@ export class ChartComponent {
     let dataX: any = [];
     let categoryX: any = [];
     this.http
-      .get('https://localhost:9000/chart_data/load_chart/' + id)
+      .get(this.api+'/chart_data/load_chart/' + id)
       .subscribe((res) => {
         this.holder = res;
         dataX = this.holder.jsonarray
@@ -82,32 +81,6 @@ export class ChartComponent {
         dataX = dataX.slice(0, -3) + ']';
         data = JSON.parse(dataX)
         
-        console.log('AGORA FOI? data ',typeof(data))
-        console.log('AGORA FOI? cate ',typeof(category))
-        
-        console.log('AGORA FOI? data ',(data))
-        console.log('AGORA FOI? cate ',(category))
-        
-        
-        // this.holders = this.holder.list;
-        // Object.entries(res).forEach(([key, value]) => {
-        //   this.content = `${key}: ${value}`;
-        // });
-        // this.content = this.content.replace('undefinedjsonarray: ', '');
-        // this.content = this.content.replace('jsonarray: ', '');
-        // this.content = this.content.replace('categoriesArray: ', '');
-        // this.content = this.content.slice(0, -4) + '\n]';
-        // category = JSON.parse(this.content);
-        // console.log('category ', category);
-
-        // this.category = res;
-        // this.category = Object.values(this.category)[0];
-        // this.category = this.category.slice(0, -3) + '\n]';
-        // this.category = this.category.slice(0, -3) + '}\n]';
-        // data = JSON.parse(this.category);
-        // console.log('data ', data);
-        // console.log('data ', typeof(data));
-
         var root = am5.Root.new('chartdiv');
         root.dateFormatter.setAll({
           dateFormat: 'yyyy-MM-dd',
