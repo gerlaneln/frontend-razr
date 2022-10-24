@@ -82,19 +82,20 @@ export class RegionFormComponent implements OnInit, OnChanges {
     The submit function also checks what user is logged, so the backend can assign the changes on the log
   */
   submit(form: NgForm): void {
+    this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
     if (this.region.id) {
-      this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
       this.service.update(this.loggedUser, this.region).subscribe({
         complete: () => {
           form.resetForm();
+          this.region = <Region>{};
           this.toastrService.success('Region edited!', 'Success');
         },
       });
     } else {
-      this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
       this.service.insert(this.loggedUser, this.region).subscribe({
         complete: () => {
           form.resetForm();
+          this.region = <Region>{};
           this.toastrService.success('Region assigned!', 'Success');
         },
       });

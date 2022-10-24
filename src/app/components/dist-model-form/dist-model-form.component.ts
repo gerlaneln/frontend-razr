@@ -107,29 +107,28 @@ export class DistModelFormComponent implements OnInit, OnChanges {
   }
 
   submit(form: NgForm): void {
-
-    /*
-      Date treatment, so the date is not pulled from the wrong time zone
-    */
-    let modified = Object.assign({}, this.model);
-    
-    let modelDate = new Date(this.model.taDate);
-    modelDate = new Date(
-      modelDate.getTime() + modelDate.getTimezoneOffset() * 60 * 1000
-    );
-    modified.taDate = modelDate.toISOString();
-
     /*
       The submit function also checks what user is logged, so the backend can assign the changes on the log
     */
 
     this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
-    this.service.insert(this.loggedUser, modified).subscribe({
-      complete: () => {
-        form.resetForm();
-        this.toastrService.success('Model assigned!', 'Success');
-      },
-    });
+    if(this.model.id){
+      this.service.update(this.loggedUser, this.model).subscribe({
+        complete: () => {
+          form.resetForm();
+          this.model = <Distribuition>{};
+          this.toastrService.success('Model edited!', 'Success');
+        },
+      });
+    }else{
+      this.service.insert(this.loggedUser, this.model).subscribe({
+        complete: () => {
+          form.resetForm();
+          this.model = <Distribuition>{};
+          this.toastrService.success('Model assigned!', 'Success');
+        },
+      });
+    }
   }
   
   /*
@@ -162,12 +161,6 @@ export class DistModelFormComponent implements OnInit, OnChanges {
         },
       ])
       .addField('#personnel', [
-        {
-          rule: 'required' as Rules,
-          errorMessage: 'This field cannot be empty',
-        },
-      ])
-      .addField('#ta-date', [
         {
           rule: 'required' as Rules,
           errorMessage: 'This field cannot be empty',

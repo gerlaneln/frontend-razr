@@ -29,7 +29,6 @@ export class UsersTeamViewComponent implements OnInit, OnChanges {
       this.teamFormationService.getByTeam(this.product.team.id).subscribe({
         next: (res: User[]) => {
           this.usersFromTeam = res;
-          console.log(this.usersFromTeam);
         }
       })
     }

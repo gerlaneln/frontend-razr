@@ -26,7 +26,14 @@
                 </div>
             </div>
 
-            <!-- Buttons for users that can add and edit Regions -->
+            <div *ngIf="this.empty == true">
+                <div class="row">
+                    <label class="label-form">
+                        Empty report, try again.
+                    </label>
+                </div>
+            </div>
+            
             <div class="form-buttons">
                 <button type="reset" class="btn-form waves-effect waves-light btn red darken-2"
                     id="btn-clean">Clean</button>
@@ -37,13 +44,6 @@
     </form>
 </div>
 
-<div *ngIf="this.empty == true">
-    <div class="row">
-        <label class="label-form">
-            Empty report
-        </label>
-    </div>
-</div>
 
 <div *ngIf="this.document == true">
     <ul class="view-list col s12">

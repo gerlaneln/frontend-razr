@@ -5,7 +5,7 @@
             <h1 class="form-title">Product View</h1>
             <div class="line-title"></div>
         </div>
-        <div class="header-view-btn right">
+        <div class="col s12 m4 header-view-btn right">
             <button id="modal-view" routerLink="/product/form" [queryParams]="{ id: 0 }" 
                     class="m5 s5 waves-effect waves-light btn indigo darken-4"
                     *ngIf="this.user.userRole != 'USER'">
@@ -18,24 +18,22 @@
         </div>
     </div>
 
-    <!-- <div id="modalScope" class="modal">
-        <app-product-scope-form [product]="this.product"></app-product-scope-form>
-    </div> -->
-
-    <!-- <div id="modalUpgrade" class="modal">
-        <app-upgrade-form [product]="this.product"></app-upgrade-form>
-    </div> -->
+    <div id="modalHistory" class="modal">
+        <app-product-history [product]="this.product"></app-product-history>
+    </div>
 
     <ul class="view-list col s12" id="product-view">
         <li *ngFor="let product of products" id="li-product">
 
-            <!-- <div class="product-image col s6">
-                <img src="" alt="{{product.name}} Image">
-            </div> -->
-
             <div class="row">
                 <span class="product-info" id="product-name">
                     {{ product.name }}
+                    <button data-target="modalHistory" (click)="getHistory(product)"
+                        class="btn modal-trigger waves-effect waves-indigo btn-flat">
+                        <i class="large material-icons">
+                            import_contacts
+                        </i>
+                    </button>
                 </span>
             </div>
             <div class="product-info-container row">
@@ -71,12 +69,12 @@
                     <div class="row">
                         <a routerLink="/product/form" [queryParams]="{ id: product.id }" 
                             class="right waves-effect waves-light btn btn-view-list indigo"
-                            *ngIf="verifyCredentials(product.team.id) || this.user.userRole != 'USER'">
+                            *ngIf="verifyCredentials(product.team.id) || this.user.userRole == 'ADMIN'">
                             Edit {{product.name}}
                         </a>
                         <a routerLink="/product/form" [queryParams]="{ id: product.id }" 
                             class="right waves-effect waves-light btn btn-view-list indigo"
-                            *ngIf="!verifyCredentials(product.team.id) && this.user.userRole == 'USER'">
+                            *ngIf="!verifyCredentials(product.team.id) && this.user.userRole != 'ADMIN'">
                             View
                         </a>
                     </div>

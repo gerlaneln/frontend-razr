@@ -4,9 +4,11 @@ import JustValidate from 'just-validate';
 import { Rules } from 'just-validate/dist/modules/interfaces';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/product';
+import { Team } from 'src/app/models/team';
 import { Upgrade } from 'src/app/models/upgrade';
 import { User } from 'src/app/models/user';
 import { ProductService } from 'src/app/services/product.service';
+import { team_formationService } from 'src/app/services/team-formation.service';
 import { UpgradeService } from 'src/app/services/upgrade.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -21,12 +23,14 @@ export class UpgradeFormComponent implements OnInit, OnChanges {
   constructor(
     private service: UpgradeService,
     private userService: UserService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private teamFormationService: team_formationService
   ) { }
 
   loggedUser: number = 0;
   upgrade: Upgrade = <Upgrade>{};
-  user: User = <User>{}
+  user: User = <User>{};
+  teams: Team[] = Array<Team>();
 
   getUser(): void{
     /*
@@ -35,6 +39,13 @@ export class UpgradeFormComponent implements OnInit, OnChanges {
     this.userService.getById(JSON.parse(sessionStorage.getItem('user') || '{}')).subscribe({
       next: (res: User) => {
         this.user = res;
+        this.teamFormationService.getByUser(this.user.id).subscribe({
+          next: (res: Team[]) => {
+            if(res.length != 0){
+              this.teams = res;
+            }
+          }
+        })
       }
     })
   }
@@ -66,6 +77,20 @@ export class UpgradeFormComponent implements OnInit, OnChanges {
     }
   }
 
+  verifyCredentials(idTeam: number):boolean{
+    let aux = 0;
+    this.teams.forEach(team => {
+      if(team.id == idTeam){
+        aux++;
+      }
+    })
+    if(aux > 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   /*
     The submit function also checks what user is logged, so the backend can assign the changes on the log
   */
@@ -80,6 +105,7 @@ export class UpgradeFormComponent implements OnInit, OnChanges {
       this.service.update(this.loggedUser, this.upgrade).subscribe({
         complete: () => {
           form.resetForm();
+          this.upgrade = <Upgrade>{};
           this.toastrService.success('Upgrade edited!', 'Success');
         }
       });
@@ -87,6 +113,7 @@ export class UpgradeFormComponent implements OnInit, OnChanges {
       this.service.insert(this.loggedUser, this.upgrade).subscribe({
         complete: () => {
           form.resetForm();
+          this.upgrade = <Upgrade>{};
           this.toastrService.success('Upgrade assigned!', 'Success');
         },
       });
@@ -103,6 +130,8 @@ export class UpgradeFormComponent implements OnInit, OnChanges {
     if(typeof(this.product) !== 'undefined'){
       this.getProduct(this.product);
     }
+
+    this.getUser();
 
     /*
       Field validation

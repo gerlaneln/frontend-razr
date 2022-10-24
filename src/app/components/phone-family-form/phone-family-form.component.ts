@@ -34,7 +34,7 @@ export class PhoneFamilyFormComponent implements OnInit, OnChanges {
     */
   loggedUser: number = 0;
 
-  product: ProductFamily = <ProductFamily>{};
+  family: ProductFamily = <ProductFamily>{};
 
   /* 
     Id is sent from the phone-family-view output to the input.
@@ -53,11 +53,11 @@ export class PhoneFamilyFormComponent implements OnInit, OnChanges {
     if (this.id > 0) {
       this.service.getById(+this.id).subscribe({
         next: (res: ProductFamily) => {
-          this.product = res;
+          this.family = res;
         },
       });
     } else {
-      this.product = <ProductFamily>{};
+      this.family = <ProductFamily>{};
     }
   }
   user: User = <User>{};
@@ -82,17 +82,16 @@ export class PhoneFamilyFormComponent implements OnInit, OnChanges {
     The submit function also checks what user is logged, so the backend can assign the changes on the log
   */
   submit(form: NgForm): void {
-    if (this.product.id) {
-      this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
-      this.service.update(this.loggedUser, this.product).subscribe({
+    this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
+    if (this.family.id) {
+      this.service.update(this.loggedUser, this.family).subscribe({
         complete: () => {
           form.resetForm();
           this.toastrService.success('Family edited!', 'Success');
         }
       });
     } else {
-      this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
-      this.service.insert(this.loggedUser, this.product).subscribe({
+      this.service.insert(this.loggedUser, this.family).subscribe({
         complete: () => {
           form.resetForm();
           this.toastrService.success('Family assigned!', 'Success');

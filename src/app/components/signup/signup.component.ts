@@ -43,6 +43,7 @@ export class SignupComponent implements OnInit, IcomponentSignup<User> {
       this.service.signUpUser(this.register).subscribe({
         complete: () => {
           form.resetForm();
+          this.register = <User>{};
           this.toastrService.success(
             'Account successfully created',
             'Sign up'

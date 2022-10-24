@@ -88,19 +88,21 @@ export class PhoneCompanyFormComponent implements OnInit,OnChanges {
       this.company.isMV = false;
     }
 
+    this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
     if (this.company.id) {
-      this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
       this.service.update(this.loggedUser, this.company).subscribe({
         complete: () => {
           form.resetForm();
+          this.company = <PhoneCompany>{};
+          this.toastrService.success('Company edited!', 'Success');
         }
       });
     } else {
-      this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
       this.service.insert(this.loggedUser, this.company).subscribe({
         complete: () => {
           form.resetForm();
-        this.toastrService.success('Company assigned!', 'Success');
+          this.company = <PhoneCompany>{};
+          this.toastrService.success('Company assigned!', 'Success');
         }
       });
     }

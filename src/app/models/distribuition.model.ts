@@ -5,7 +5,6 @@ export interface Distribuition{
     id: number,
     modelName: string,
     personnel: number,
-    taDate: string,
     beforeTa: number,
     afterTa: number,
     region: Region,

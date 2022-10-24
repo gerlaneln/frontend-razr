@@ -1,0 +1,24 @@
+<form id="team-form" class="entity-form" #form="ngForm">
+
+    <div id="form-content">
+
+        <div class="row">
+            <label class="label-form">
+                Are you sure you want to delete {{this.user.name}} from {{this.team.name}}?
+            </label>
+        </div>
+
+        <div class="row form-buttons">
+            <button class="btn-form waves-effect waves-light btn red darken-2"
+                    (click)="cancelDelete()" 
+                    [disabled]="this.noDelete == true || this.deleted == true">
+                No
+            </button>
+            <button class="btn-form waves-effect waves-light btn green darken-2" id="btn-save"
+                    (click)="deleteFormationByUserAndTeam(this.user.id, this.team.id)" 
+                    [disabled]="this.noDelete == true || this.deleted == true">
+                Yes
+            </button>
+        </div>
+    </div>
+</form>

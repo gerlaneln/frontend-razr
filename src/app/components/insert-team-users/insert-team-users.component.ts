@@ -22,7 +22,7 @@ export class InsertTeamUsersComponent implements OnInit, OnChanges {
     private service: team_formationService,
     private toastrService: ToastrService
   ) { }
-  
+
   // Array with all users saved on the db
   allUsers: User[] = Array<User>();
   // Array with all users from the team
@@ -35,6 +35,7 @@ export class InsertTeamUsersComponent implements OnInit, OnChanges {
   loggedUser: number = 0;
   teamFormation: TeamFormation = <TeamFormation>{};
   oneUserTeam: boolean = false;
+  savedTeam: boolean = false;
 
   getUser(): void{
     /*
@@ -52,7 +53,7 @@ export class InsertTeamUsersComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.teamAssignment(this.team);
   }
-  
+
   teamAssignment(team: Team) {
     this.team = team;
     this.getUsers();
@@ -69,12 +70,12 @@ export class InsertTeamUsersComponent implements OnInit, OnChanges {
         this.oneUserTeam = true;
       }
     }
-  
+
     /*
       deleteFromTeam takes users from the list of those who are going to be assigned
       to the team
     */
-   
+
     deleteFromTeam(user: User, index: number): void {
       let removedItem = this.usersTeam.splice(index, 1);
     }
@@ -86,7 +87,7 @@ export class InsertTeamUsersComponent implements OnInit, OnChanges {
         }
       });
     }
-  
+
     getUsers(): void {
       this.availableUsers = [];
       if(this.team.id > 0){
@@ -122,7 +123,7 @@ export class InsertTeamUsersComponent implements OnInit, OnChanges {
         this.teamFormation.user = user;
         this.service.insert(this.loggedUser, this.teamFormation).subscribe({
           complete: () => {
-            // form.resetForm();
+            this.savedTeam = true;
             this.toastrService.success('Team assigned!', 'Success');
           },
         });
@@ -143,7 +144,7 @@ export class InsertTeamUsersComponent implements OnInit, OnChanges {
       Field validation
     */
 
-    let validate = new JustValidate('#team-form');
+    let validate = new JustValidate('#insert-team-form');
 
     validate
       .addField('#team-user-select', [

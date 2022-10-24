@@ -40,6 +40,8 @@ import { ReportRequestComponent } from './components/report-request/report-reque
 import { UsersTeamViewComponent } from './components/users-team-view/users-team-view.component';
 import { UpgradeProductViewComponent } from './components/upgrade-product-view/upgrade-product-view.component';
 import { ScopeProductViewComponent } from './components/scope-product-view/scope-product-view.component';
+import { UserTeamDeleteComponent } from './components/user-team-delete/user-team-delete.component';
+import { ProductHistoryComponent } from './components/product-history/product-history.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +76,9 @@ import { ScopeProductViewComponent } from './components/scope-product-view/scope
     ReportRequestComponent,
     UsersTeamViewComponent,
     UpgradeProductViewComponent,
-    ScopeProductViewComponent
+    ScopeProductViewComponent,
+    UserTeamDeleteComponent,
+    ProductHistoryComponent
 
 
   ],

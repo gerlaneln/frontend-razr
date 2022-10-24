@@ -66,11 +66,19 @@ export class NavigationComponent implements OnInit {
   }
 
   getAuthUser(id: number): void {
-    this.userService.getById(id).subscribe({
-      next: (res: User) => {
-        this.user = res;
-      },
-    });
+    if(id > 0){
+      this.userService.getById(id).subscribe({
+        next: (res: User) => {
+          if(res.hasOwnProperty('id')){
+            this.user = res;
+          }else{
+            this.router.navigate(['/login']);
+          }
+        },
+      });
+    }else{
+      this.router.navigate(['/login']);
+    }
   }
 
   logout(): void {
@@ -79,11 +87,7 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     const userId: number = JSON.parse(sessionStorage.getItem('user') || '{}');
-    if (!userId || userId <= 0) {
-      this.router.navigate(['/login']);
-    } else {
-      this.getAuthUser(userId);
-    }
+    this.getAuthUser(userId);
 
     const tooltip = document.querySelectorAll('.tooltipped');
     const options = {};

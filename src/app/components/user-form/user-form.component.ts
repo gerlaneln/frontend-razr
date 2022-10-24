@@ -14,6 +14,7 @@ import JustValidate from 'just-validate';
 import { Rules } from 'just-validate/dist/modules/interfaces';
 import { Team } from 'src/app/models/team';
 import { team_formationService } from 'src/app/services/team-formation.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-form',
@@ -23,19 +24,20 @@ import { team_formationService } from 'src/app/services/team-formation.service';
 export class UserFormComponent implements OnInit, OnChanges {
   constructor(
     private service: UserService,
-    private teamFormationService: team_formationService
-  ) {}
-  
+    private teamFormationService: team_formationService,
+    private toastrService: ToastrService
+  ) { }
+
   compareByName = Utils.compareByName;
-  
+
   loggedUser: number = 0;
-  
+
   user: User = <User>{};
   user1: User = <User>{};
   password: string = '';
   passwordEdit: string = '';
-  teams: Team[] = Array<Team>(); 
-  get(): void{
+  teams: Team[] = Array<Team>();
+  get(): void {
     /*
       Get the teams that are assigned to that user
     */
@@ -45,11 +47,11 @@ export class UserFormComponent implements OnInit, OnChanges {
         this.teamFormationService.getByUser(res.id).subscribe({
           next: (res: Team[]) => {
             this.teams = res;
-          } 
+          }
         })
       }
     })
-  } 
+  }
 
   /* 
     Id is sent from the user-form output to the input.
@@ -79,28 +81,29 @@ export class UserFormComponent implements OnInit, OnChanges {
   }
 
   submit(form: NgForm): void {
-    if(typeof(this.user.active) === 'undefined'){
+    if (typeof (this.user.active) === 'undefined') {
       this.user.active = false;
     }
-    // if (this.password) {
-      // if (this.password.match(this.user.password)) {
-        this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
-        this.service.insert(this.loggedUser, this.user).subscribe({
-          complete: () => {
-            form.resetForm();
-          },
-        });
-      // } else {
-      //   confirm('Password does not match');
-      // }
-    // } else {
-    //   this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
-    //   this.service.insert(this.loggedUser, this.user).subscribe({
-    //     complete: () => {
-    //       form.resetForm();
-    //     },
-    //   });
-    // }
+    this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
+    if(this.user.id){
+      this.service.update(this.loggedUser, this.user).subscribe({
+        complete: () => {
+          form.resetForm();
+          this.passwordEdit = '';
+          this.user = <User>{};
+          this.toastrService.success('User edited!', 'Success');
+        },
+      });
+    }else{
+      this.service.insert(this.loggedUser, this.user).subscribe({
+        complete: () => {
+          form.resetForm();
+          this.passwordEdit = '';
+          this.user = <User>{};
+          this.toastrService.success('User assigned!', 'Success');
+        },
+      });
+    }
   }
 
   /*
@@ -161,7 +164,7 @@ export class UserFormComponent implements OnInit, OnChanges {
           },
           errorMessage: 'Passwords should be the same',
         },
-      ]).addField("#role-select",[
+      ]).addField("#role-select", [
         {
           rule: 'required' as Rules
         }

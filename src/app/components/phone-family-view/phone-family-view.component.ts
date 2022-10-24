@@ -20,7 +20,7 @@ export class PhoneFamilyViewComponent implements OnInit {
     ) { }
 
   id: number = 0;
-  phonefamily: ProductFamily[] = Array<ProductFamily>();
+  phonefamilies: ProductFamily[] = Array<ProductFamily>();
 
   /*
     Output that emits the id to Phone-Family-Form
@@ -35,7 +35,7 @@ export class PhoneFamilyViewComponent implements OnInit {
   get(): void {
     this.service.getAll().subscribe({
       next: (res: ProductFamily[]) => {
-        this.phonefamily = res;
+        this.phonefamilies = res;
       }
     });
   }

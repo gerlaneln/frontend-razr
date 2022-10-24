@@ -37,7 +37,8 @@
                     {{user.name}} - {{user.userRole}}
                     <button class="deleteUserList" 
                             (click)="deleteFromTeam(user, usersTeam.indexOf(user))"
-                            *ngIf="this.oneUserTeam == false">
+                            *ngIf="this.oneUserTeam == false"
+                            [disabled]="this.savedTeam == true">
                         <i class="material-icons">delete</i>
                     </button>
                 </li>
@@ -48,12 +49,12 @@
 
 
         <div class="row form-buttons">
-            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2"
+            <!-- <button type="reset" class="btn-form waves-effect waves-light btn red darken-2"
                 id="btn-clean" *ngIf="this.user.userRole != 'USER'">
                 Clean
-            </button>
+            </button> -->
             <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save"
-                value="Save" [disabled]="form.invalid" *ngIf="this.user.userRole != 'USER'">
+                value="Save" [disabled]="form.invalid || this.savedTeam == true" *ngIf="this.user.userRole != 'USER'">
                 Save
             </button>
         </div>

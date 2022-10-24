@@ -11,25 +11,27 @@
         </div>
         <div class="row">
             <label for="upgradeType" class="label-form required">Upgrade Type: </label>
-            <input type="text" class="input-form" id="upgrade-type" [(ngModel)]="upgrade.upgradeType" name="upgradeType">
+            <input type="text" class="input-form" id="upgrade-type" [(ngModel)]="upgrade.upgradeType" name="upgradeType"
+            [disabled]="!verifyCredentials(product.team.id) && this.user.userRole == 'USER' || this.user.userRole == 'USER'">
         </div>
         <div class="row">
             <label for="releaseDate" class="label-form required">Release Date: </label>
-            <input type="date" class="input-form" id="release-date" [(ngModel)]="upgrade.releaseDate" name="releaseDate">
+            <input type="date" class="input-form" id="release-date" [(ngModel)]="upgrade.releaseDate" name="releaseDate"
+            [disabled]="!verifyCredentials(product.team.id) && this.user.userRole == 'USER' || this.user.userRole == 'USER'">
         </div>
         <div class="row">
             <label for="changeLog" class="label-form">Change Log: </label>
-            <textarea id="changeLogText" class="materialize-textarea" [(ngModel)]="upgrade.changeLog" name="changeLog" data-length="200"></textarea>
+            <textarea id="changeLogText" class="materialize-textarea" [(ngModel)]="upgrade.changeLog" name="changeLog" data-length="200"
+            [disabled]="!verifyCredentials(product.team.id) && this.user.userRole == 'USER' || this.user.userRole == 'USER'"></textarea>
         </div>
 
         <!-- Buttons for users that can add and edit Upgrade -->
-        <div class="form-buttons row">
-            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean"
-                    *ngIf="this.user.userRole != 'USER'">
+        <div class="form-buttons row" *ngIf="verifyCredentials(product.team.id) && this.user.userRole != 'USER' || this.user.userRole == 'ADMIN'">
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean">
                 Clean
             </button>
             <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save" 
-                    value="Save" [disabled]="form.invalid" *ngIf="this.user.userRole != 'USER'">
+                    value="Save" [disabled]="form.invalid">
                 Save
             </button>
         </div>

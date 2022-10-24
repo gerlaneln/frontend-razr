@@ -35,7 +35,6 @@ export class PhoneCompanyViewComponent implements OnInit {
     this.service.getAll().subscribe({
       next: (res: PhoneCompany[]) => {
         this.company = res;
-        console.log(this.company)
       }
     });
   }

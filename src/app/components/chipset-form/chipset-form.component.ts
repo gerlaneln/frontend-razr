@@ -82,19 +82,20 @@ export class ChipsetFormComponent implements OnInit, OnChanges {
   */
 
   submit(form: NgForm): void {
+    this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
     if (this.chip.id) {
-      this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
       this.service.update(this.loggedUser, this.chip).subscribe({
         complete: () => {
           form.resetForm();
+          this.chip = <Chipset>{};
           this.toastrService.success('Chipset edited!', 'Success');
         }
       });
     } else {
-      this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
       this.service.insert(this.loggedUser, this.chip).subscribe({
         complete: () => {
           form.resetForm();
+          this.chip = <Chipset>{};
           this.toastrService.success('Chipset assigned!', 'Success');
         }
       });

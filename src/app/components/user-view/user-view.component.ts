@@ -34,9 +34,6 @@ export class UserViewComponent implements OnInit {
   get(): void {
     this.service.get().subscribe({
       next: (res: User[]) => {
-        res.forEach( user => {
-          console.log(user.active)
-        })
         this.users = res;
       }
     });

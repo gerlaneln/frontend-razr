@@ -37,10 +37,17 @@
     font-size: 22px;
     font-weight: 500;
     margin-top: 0;
+    width: fit-content;
 }
 
 .line-title{
     margin-top: -20px;
+    margin-bottom: 30px;
+    border-bottom: 1.2px solid #0F0014;
+    width: 25%;
+}
+
+#line-title-product{
     margin-bottom: 30px;
     border-bottom: 1.2px solid #0F0014;
     width: 25%;
@@ -375,6 +382,36 @@
 .user-list{
     text-indent: 1em;
     border-bottom: 1px solid #fff !important;
+}
+
+/* History View */
+
+.history-display{
+    margin: 2rem;
+}
+
+#history-title{
+    padding-bottom: 1rem;
+}
+
+.history-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.history-line{
+    border-left: 1px solid #39004D;
+}
+
+.history-date{
+    color: #260033;
+    font-weight: 500;
+}
+
+.history-author{
+    font-size: 13px;
+    text-align: center;
 }
 
 @media only screen and (max-width: 964px) {

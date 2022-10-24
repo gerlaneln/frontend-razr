@@ -64,7 +64,7 @@ export class LifeCycleStatusFormComponent implements OnInit {
       Field validation
     */
 
-    let validate = new JustValidate('life-cycle-form');
+    let validate = new JustValidate('#life-cycle-form');
 
     validate.addField('#life-cycle-name', [
       {

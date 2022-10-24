@@ -15,7 +15,8 @@
         <div class="row select-div">
             <div class="col m10 s12">
                 <label class="label-form required">SO: </label>
-                <select class="browser-default" id="so-select" name="so" [(ngModel)]="productScope.so" [compareWith]="compareByName">
+                <select class="browser-default" id="so-select" name="so" [(ngModel)]="productScope.so"
+                        [compareWith]="compareByName" [disabled]="!verifyCredentials(product.team.id) && this.user.userRole == 'USER' || this.user.userRole == 'USER'">
                     <option [value]="null" selected disabled>Select the option</option>
                     <option *ngFor="let s of so" [ngValue]="s">{{s}}</option>
                 </select>
@@ -25,7 +26,8 @@
         <div class="row select-div">
             <div class="col m10 s12">
                 <label class="label-form required">Model: </label>
-                <select class="browser-default" id="model-select" name="model" [(ngModel)]="productScope.distModel" [compareWith]="compareById">
+                <select class="browser-default" id="model-select" name="model" [(ngModel)]="productScope.distModel" [compareWith]="compareById"
+                [disabled]="!verifyCredentials(product.team.id) && this.user.userRole == 'USER' || this.user.userRole == 'USER'">
                     <option [value]="null" selected disabled>Select the option</option>
                     <option *ngFor="let m of models" [ngValue]="m">{{m.modelName}} - Region: {{m.region.regionName}}</option>
                 </select>
@@ -35,18 +37,18 @@
         <div class="row">
             <div class="col s10">
                 <label for="commentary" class="label-form">Commentary: </label>
-                <textarea id="commentary" class="materialize-textarea" [(ngModel)]="productScope.comment" name="commentary" data-length="255"></textarea>
+                <textarea id="commentary" class="materialize-textarea" [(ngModel)]="productScope.comment" 
+                name="commentary" data-length="255" [disabled]="!verifyCredentials(product.team.id) && this.user.userRole == 'USER' || this.user.userRole == 'USER'"></textarea>
             </div>
         </div>
 
         <!-- Buttons for users that can add and edit Product Scope -->
-        <div class="row form-buttons">
-            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean"
-                    *ngIf="this.user.userRole != 'USER'">
+        <div class="row form-buttons" *ngIf="verifyCredentials(product.team.id) && this.user.userRole != 'USER' || this.user.userRole == 'ADMIN'">
+            <button type="reset" class="btn-form waves-effect waves-light btn red darken-2" id="btn-clean">
                 Clean
             </button>
             <button type="submit" class="btn-form waves-effect waves-light btn green darken-2" id="btn-save" 
-                    value="Save" [disabled]="form.invalid" *ngIf="this.user.userRole != 'USER'">
+                    value="Save" [disabled]="form.invalid">
                 Save
             </button>
         </div>

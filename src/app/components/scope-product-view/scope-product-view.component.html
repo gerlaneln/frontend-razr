@@ -22,12 +22,6 @@
     </label>
 </div>
 
-<div class="row">
-    <label class="label-form">
-        TA Date: {{ productScope.distModel ? (productScope.distModel.taDate | date:'dd/MM/yyyy') : "Not assigned" }}
-    </label>
-</div>
-
 <div class="row" *ngIf="productScope.distModel != null">
     <label class="label-form col s4">
         {{ productScope.distModel.beforeTa }} months before TA

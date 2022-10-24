@@ -42,6 +42,7 @@ export class TeamFormComponent implements OnInit, OnChanges {
   users: User[] = Array<User>();
   user: User = <User>{};
   oneUserTeam: boolean = false;
+  savedTeam: boolean = false;
 
   getUser(): void{
     /*
@@ -54,7 +55,7 @@ export class TeamFormComponent implements OnInit, OnChanges {
     })
   }
 
-  /* 
+  /*
     Team is sent from the product-form output to the input.
     Everytime the value of id is updated (everytime he's emitted from the modal call on product-form),
     the edit function is called (ngOnChanges) to search for the entity with this id on the database.
@@ -83,7 +84,7 @@ export class TeamFormComponent implements OnInit, OnChanges {
     deleteFromTeam takes users from the list of those who are going to be assigned
     to the team
   */
- 
+
   deleteFromTeam(user: User, index: number): void {
     let removedItem = this.usersTeam.splice(index, 1);
   }
@@ -106,7 +107,7 @@ export class TeamFormComponent implements OnInit, OnChanges {
       this.teamFormation.user = user;
       this.service.insert(this.loggedUser, this.teamFormation).subscribe({
         complete: () => {
-          // form.resetForm();
+          this.savedTeam = true;
           this.toastrService.success('Team assigned!', 'Success');
         },
       });
@@ -123,11 +124,11 @@ export class TeamFormComponent implements OnInit, OnChanges {
     let validate = new JustValidate('#team-form');
 
     validate
-      .addField('#team-select', [
-        {
-          rule: 'required' as Rules,
-        },
-      ])
+      // .addField('#team-select', [
+      //   {
+      //     rule: 'required' as Rules,
+      //   },
+      // ])
       .addField('#team-user-select', [
         {
           rule: 'required' as Rules,

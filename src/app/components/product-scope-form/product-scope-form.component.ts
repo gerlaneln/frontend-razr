@@ -12,6 +12,8 @@ import { Rules } from 'just-validate/dist/modules/interfaces';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import { team_formationService } from 'src/app/services/team-formation.service';
+import { Team } from 'src/app/models/team';
 
 
 @Component({
@@ -26,8 +28,8 @@ export class ProductScopeFormComponent implements OnInit, OnChanges {
     private service: ProductScopeService,
     private userService: UserService,
     private modelService: DistribuitionModelService,
-    private toastrService: ToastrService
-
+    private toastrService: ToastrService,
+    private teamFormationService: team_formationService
   ) { }
 
   /*
@@ -47,7 +49,7 @@ export class ProductScopeFormComponent implements OnInit, OnChanges {
 
   user: User = <User>{};
 
-  // product: Product = <Product>{};
+  teams: Team[] = Array<Team>();
   productScope: ProductScope = <ProductScope>{};
   models: Distribuition[] = Array<Distribuition>();
 
@@ -58,6 +60,13 @@ export class ProductScopeFormComponent implements OnInit, OnChanges {
     this.userService.getById(JSON.parse(sessionStorage.getItem('user') || '{}')).subscribe({
       next: (res: User) => {
         this.user = res;
+        this.teamFormationService.getByUser(this.user.id).subscribe({
+          next: (res: Team[]) => {
+            if(res.length != 0){
+              this.teams = res;
+            }
+          }
+        })
       }
     })
   }
@@ -89,25 +98,39 @@ export class ProductScopeFormComponent implements OnInit, OnChanges {
     }
   }
 
+  verifyCredentials(idTeam: number):boolean{
+    let aux = 0;
+    this.teams.forEach(team => {
+      if(team.id == idTeam){
+        aux++;
+      }
+    })
+    if(aux > 0){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   /*
     The submit function also checks what user is logged, so the backend can assign the changes on the log
   */
   submit(form: NgForm): void {
     this.loggedUser = JSON.parse(sessionStorage.getItem('user') || '{}');
     this.productScope.product = this.product;
-    console.log(this.productScope.product);
-    console.log(this.productScope);
     if(this.productScope.id){
       this.service.update(this.loggedUser, this.productScope).subscribe({
         next: (res: ProductScope) => {
           form.resetForm();
-          this.toastrService.success('Scope assigned!', 'Success');
+          this.productScope = <ProductScope>{};
+          this.toastrService.success('Scope edited!', 'Success');
         }
       })
     }else{
       this.service.insert(this.loggedUser, this.productScope).subscribe({
         next: (res: ProductScope) => {
           form.resetForm();
+          this.productScope = <ProductScope>{};
           this.toastrService.success('Scope assigned!', 'Success');
         }
       })
@@ -124,6 +147,8 @@ export class ProductScopeFormComponent implements OnInit, OnChanges {
 
     const textArea = document.querySelectorAll('textarea');
     M.CharacterCounter.init(textArea);
+
+    this.getUser();
 
     this.modelService.getAll().subscribe({
       next: (res: Distribuition[]) => {

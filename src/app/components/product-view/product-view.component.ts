@@ -48,6 +48,12 @@ export class ProductViewComponent implements OnInit {
     this.insertUpgradeProduct.emit(product);
   }
 
+  @Output() history = new EventEmitter<Product>();
+  getHistory(product: Product){
+    this.product = product;
+    this.history.emit(product);
+  }
+
   getProduct(): void{
     this.service.getAll().subscribe({
       next: (res: Product[]) => {

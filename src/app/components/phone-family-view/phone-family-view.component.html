@@ -25,7 +25,7 @@
 
     <!-- List of Phone Families -->
     <ul class="view-list">
-        <li *ngFor="let item of phonefamily">
+        <li *ngFor="let item of phonefamilies">
             {{ item.nameFamily }}
             <!-- Buttons for user that can edit Phone Family -->
             <div class="view-buttons" *ngIf="this.user.userRole != 'USER'">

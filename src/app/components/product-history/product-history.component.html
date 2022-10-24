@@ -1,0 +1,20 @@
+<div class="history-display">
+    <div id="history-title" class="row form-title">
+        <span>History of product {{this.product.name}}</span>
+    </div>
+    <ul class="user-list label-form">
+        <li class="row history-line" *ngFor="let history of stories">
+            <div class="history-container">
+                <div class="col m5 s12">
+                    <span class="history-date">
+                        {{history.snapshotDate | date:('dd/MM/yyyy')}}
+                    </span>
+                    <span class="history-author">({{history.loggedUser}})</span>
+                </div>
+                <div class="col m7 s12">
+                    {{history.comment}}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
